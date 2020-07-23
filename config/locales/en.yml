@@ -38,3 +38,5 @@ en:
   login_page: "Login Page"
   user_name: "User Name"
   password: "Password"
+  header:
+    sign_out: "Sign out"
