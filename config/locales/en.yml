@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+  home:
+    loginMessage: "Login from here to access."
+    applicationName: "Student Management System"
+    login: "Login"
+  login_page: "Login Page"
+  user_name: "User Name"
+  password: "Password"
