@@ -10,7 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_23_232127) do
+ActiveRecord::Schema.define(version: 2020_07_24_020109) do
+
+  create_table "assesments", force: :cascade do |t|
+    t.integer "subject_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_assesments_on_subject_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
+
+  create_table "grades", force: :cascade do |t|
+    t.integer "assesment_id"
+    t.integer "user_id"
+    t.float "grade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assesment_id"], name: "index_grades_on_assesment_id"
+    t.index ["user_id"], name: "index_grades_on_user_id"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "user_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_subjects_on_course_id"
+    t.index ["user_id"], name: "index_subjects_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
