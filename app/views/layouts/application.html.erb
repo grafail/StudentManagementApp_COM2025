@@ -6,9 +6,13 @@
   <%= javascript_include_tag :modernizr %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
+  <link href="netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <% if content_for?(:head) %>
+    <%= yield(:head) %>
+  <% end %>
 
 </head>
 

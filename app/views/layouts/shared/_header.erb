@@ -1,12 +1,19 @@
-<nav class="navbar navbar-light navbar-expand bg-light navigation-clean" style="height: 10vh;">
-  <div class="container"><a class="navbar-brand" href="#">LibraryApp</a>
-    <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
-    <div class="collapse navbar-collapse" id="navcol-1"><a href="/app/assets/stylesheets"><%= t('header.home') %></a>
-      <% if signed_in? %>
-        Signed in as: <%= current_user.email %>
-        <%= button_to t('header.sign_out'), sign_out_path, method: :delete, :id => "loginButton", :class => "btn btn-primary ml-auto"%>
-      <% end %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">StudentApp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    </div>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <% if signed_in? %>
+      <div style="color:white;"> Signed in as: <%= current_user.email %> </div>
+      <div class="vl"></div>
+      <%= button_to t('header.sign_out'), sign_out_path, method: :delete, :id => "loginButton", :class => "btn btn-primary ml-auto" %>
+    <% end %>
   </div>
 </nav>
