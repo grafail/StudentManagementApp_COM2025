@@ -6,7 +6,7 @@
   <%= javascript_include_tag :modernizr %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <link href="netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -17,16 +17,17 @@
 </head>
 
 <body>
-<% unless current_page?(sign_in_path) %>
+<% unless current_page?(new_user_session_path) %>
   <%= render "layouts/shared/header" %>
+  <div style="height: 90vh;">
 <% end %>
 <div id="flash">
-  <% flash.each do |key, value| %>
-    <div class="flash <%= key %>"><%= value %></div>
-  <% end %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 </div>
 <%= yield %>
-<% unless current_page?(sign_in_path) %>
+<% unless current_page?(new_user_session_path) %>
+  </div>
   <%= render "layouts/shared/footer" %>
 <% end %>
 </body>
