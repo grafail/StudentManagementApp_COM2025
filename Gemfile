@@ -20,8 +20,11 @@ gem 'bootstrap', '~> 4.5.0'
 gem 'jquery-rails'
 
 gem 'modernizr-rails'
+gem 'toastr-rails'
 
 gem "devise"
+gem 'cancancan'
+gem 'rolify'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

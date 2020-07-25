@@ -1,0 +1,22 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>User ID</th>
+    <th>Email Address</th>
+    <!--
+    <th>Admin</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    -->
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to('Edit registration', edit_user_registration_path(user)) %></td>
+
+    </tr>
+  <% end %>
+</table>

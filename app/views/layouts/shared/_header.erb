@@ -13,7 +13,7 @@
     <% if signed_in? %>
       <div style="color:white;"> Signed in as: <%= current_user.email %> </div>
       <div class="vl"></div>
-      <%= button_to t('header.sign_out'), sign_out_path, method: :delete, :id => "loginButton", :class => "btn btn-primary ml-auto" %>
+      <%= button_to t('header.sign_out'), destroy_user_session_path, method: :delete, :id => "loginButton", :class => "btn btn-primary ml-auto" %>
     <% end %>
   </div>
 </nav>
