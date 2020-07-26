@@ -1,29 +1,101 @@
-<p id="notice"><%= notice %></p>
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
 
-<h1>Courses</h1>
-
-<table>
+<table id="table">
   <thead>
-    <tr>
-      <th>Title</th>
-      <th>Year</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th data-field="id">ID</th>
+    <th data-field="title">Title</th>
+    <th data-field="year">Year</th>
+  </tr>
   </thead>
-
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.title %></td>
-        <td><%= course.year %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
 </table>
 
-<br>
+<style>
+  .like {
+    margin-right: 10px;
+  }
+</style>
+
+
+<table
+  id="table"
+  data-id-field="id">
+</table>
+
+<script>
+    var $table = $('#table')
+    var $remove = $('#remove')
+    var selections = []
+
+    function operateFormatter(value, row, index) {
+        return [
+            '<a class="like" href="/courses/'+row.id+'/edit" title="Like" data-remote="true" data-toggle="modal" data-target="modal-window">',
+            '<i class="fa fa-pencil-alt"></i>',
+            '</a>  ',
+            '<a class="remove" href="javascript:void(0)" title="Remove">',
+            '<i class="fa fa-trash"></i>',
+            '</a>'
+        ].join('')
+    }
+
+    window.operateEvents = {
+    //    'click .like': function (e, value, row, index) {
+     //       alert('You clicked the edit action, row: ' + JSON.stringify(row))
+      //  },
+        'click .remove': function (e, value, row, index) {
+
+            $.ajax({
+                url : ('/courses/'+row.id),
+                type : 'DELETE',
+                dataType : 'json',
+                success : function(e) {
+                    $table.bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    })
+                }
+            });
+        }
+    }
+
+    function initTable() {
+        $table.bootstrapTable('destroy').bootstrapTable({
+            data: <%= to_data_html(@courses) %>,
+            height: '550',
+            columns: [
+                [{
+                    field: 'id',
+                    title: 'Course ID',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'title',
+                    title: 'Course Title',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'year',
+                    title: 'Year',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'operate',
+                    align: 'center',
+                    clickToSelect: false,
+                    events: window.operateEvents,
+                    formatter: operateFormatter
+                }]
+            ]
+        })
+    }
+
+    $(function() {
+        initTable()
+    })
+</script>
 
 <%= link_to 'New Course', new_course_path %>

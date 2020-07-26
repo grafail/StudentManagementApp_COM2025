@@ -6,10 +6,13 @@
   <%= javascript_include_tag :modernizr %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://unpkg.com/bootstrap-table@1.17.0/dist/bootstrap-table.min.js"></script>
   <% if content_for?(:head) %>
     <%= yield(:head) %>
   <% end %>
@@ -17,6 +20,7 @@
 </head>
 
 <body>
+<% console %>
 <% unless flash.empty? %>
   <script type="text/javascript">
       <% flash.each do |f| %>

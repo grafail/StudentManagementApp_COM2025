@@ -40,3 +40,5 @@ en:
   password: "Password"
   header:
     sign_out: "Sign out"
+  footer:
+    copyright: "© StudentApp 2020. All Rights Reserved."
