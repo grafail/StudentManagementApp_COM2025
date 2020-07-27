@@ -5,7 +5,6 @@
 <% end %>
 
 <script>
-    MicroModal.close('modal-1');
     //Build Tabulator
     var table = new Tabulator("#table", {
         height: "311px",
@@ -13,9 +12,9 @@
         placeholder: "No Data Set",
         columns: [
             {title: "User ID", field: "user_id", sorter: "string", width: 200, editor: true},
-            {title: "User Email", field: "user_mail",  formatter:userFormatter(), sorter: "string", width: 200, editor: false},
+            {title: "User Email", field: "user_id",  formatter:userFormatter, sorter: "string", width: 200, editor: false},
             {title: "Course ID", field: "course_id", sorter: "number", editor: true},
-            {title: "Course Name",  formatter:courseFormatter,field: "course_name", sorter: "number", editor: false},
+            {title: "Course Name", field: "course_id",  formatter:courseFormatter,field: "course_name", sorter: "number", editor: false},
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
         ],
         cellEdited: function (cell) {
