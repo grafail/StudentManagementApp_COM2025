@@ -1,10 +1,10 @@
-<%= form_with(model: assesment, local: true) do |form| %>
-  <% if assesment.errors.any? %>
+<%= form_with(model: assessment, remote: true) do |form| %>
+  <% if assessment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(assesment.errors.count, "error") %> prohibited this assesment from being saved:</h2>
+      <h2><%= pluralize(assessment.errors.count, "error") %> prohibited this assessment from being saved:</h2>
 
       <ul>
-      <% assesment.errors.full_messages.each do |message| %>
+      <% assessment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -19,9 +19,5 @@
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
 <% end %>

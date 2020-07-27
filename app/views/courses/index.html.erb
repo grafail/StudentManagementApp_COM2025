@@ -1,19 +1,25 @@
-<div id="example-table"></div>
+<div id="table"></div>
+
+<% content_for :modal do %>
+  <% render 'form', course:Course.new %>
+<% end %>
 
 <script>
+
+
+
     //Build Tabulator
-    var table = new Tabulator("#example-table", {
+    var table = new Tabulator("#table", {
         height: "311px",
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "ID", field: "id", sorter: "string", width: 200, editor: true},
+            {title: "ID", field: "id", sorter: "string", width: 200, editor: false},
             {title: "Title", field: "title", sorter: "number", editor: true},
-            {title: "Year", field: "year", sorter: "string", editor: true}
+            {title: "Year", field: "year", sorter: "string", editor: true},
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
         ],
         cellEdited: function (cell) {
-            // This callback is called any time a cell is edited.
-            console.log(cell.getRow().getData())
             $.ajax({
 
                 url: '/courses/'+cell.getRow().getData().id,
@@ -37,5 +43,4 @@
     });
 
 </script>
-
-<%= link_to 'New Course', new_course_path %>
+<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Course</button>

@@ -14,7 +14,7 @@ class GradesTest < ApplicationSystemTestCase
     visit grades_url
     click_on "New Grade"
 
-    fill_in "Assesment", with: @grade.assesment_id
+    fill_in "Assessment", with: @grade.assesment_id
     fill_in "Grade", with: @grade.grade
     fill_in "User", with: @grade.user_id
     click_on "Create Grade"
@@ -27,7 +27,7 @@ class GradesTest < ApplicationSystemTestCase
     visit grades_url
     click_on "Edit", match: :first
 
-    fill_in "Assesment", with: @grade.assesment_id
+    fill_in "Assessment", with: @grade.assesment_id
     fill_in "Grade", with: @grade.grade
     fill_in "User", with: @grade.user_id
     click_on "Update Grade"

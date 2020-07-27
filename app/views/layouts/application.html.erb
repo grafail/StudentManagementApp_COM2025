@@ -12,6 +12,10 @@
   <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
   <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
 
+  <script type="text/javascript" src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+
+
+
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   <% if content_for?(:head) %>
@@ -21,6 +25,30 @@
 </head>
 
 <body>
+<% console %>
+<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+      <header class="modal__header">
+        <h2 class="modal__title">
+          Micromodal
+        </h2>
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      </header>
+      <div class="modal-content-content">
+        <div class="modal__content">
+          <% if content_for?(:modal) %>
+            <%= yield(:modal) %>
+          <% end %>
+        </div>
+        <footer class="modal__footer">
+          <button class="modal__btn" data-micromodal-close onClick="submitForm();" aria-label="Cancel">Submit</button>
+          <button class="modal__btn" data-micromodal-close aria-label="Cancel">Close</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>
 <% unless flash.empty? %>
   <script type="text/javascript">
       <% flash.each do |f| %>

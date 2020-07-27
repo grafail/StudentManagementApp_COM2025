@@ -1,24 +1,60 @@
-<table id="table">
-  <thead>
-  <tr>
-    <th data-field="course_id">Course</th>
-    <th data-field="user_id">User</th>
-    <th data-field="description">Description</th>
-  </tr>
-  </thead>
-</table>
+<div id="table"></div>
+
+<% content_for :modal do %>
+  <% render 'form', subject:Subject.new %>
+<% end %>
+
 <script>
-    $(document).ready(function () {
-        var $table = $('#table')
 
-        $(function() {
-            var data = <%= to_data_html(@subjects) %>
-                $table.bootstrapTable({data: data})
-        })
+    //Build Tabulator
+    var table = new Tabulator("#table", {
+        height: "311px",
+        layout: "fitColumns",
+        ajaxResponse:function(url, params, response){
+            //url - the URL of the request
+            //params - the parameters passed with the request
+            //response - the JSON object returned in the body of the response.
+            console.log(response);
+            return response; //return the tableData property of a response json object
+        },
+        placeholder: "No Data Set",
+        columns: [
+            {title: "Subject ID", field: "id", sorter: "string", width: 200, editor: true},
+            {title: "Course ID", field: "course_id", sorter: "string", width: 200, editor: true},
+            {title: "Course Name", field: "course_id", formatter: courseFormatter, sorter: "string", width: 200, editor: false},
+            {title: "Lecturer ID", field: "user_id", sorter: "string", width: 200, editor: true},
+            {title: "Lecturer Name", field: "user_id", formatter: userFormatter, sorter: "string", width: 200, editor: false},
+            {title: "Title", field: "title", sorter: "string", editor: true},
+            {title: "Description", field: "description", sorter: "string", editor: false},
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+        ],
+        cellEdited: function (cell) {
+            // This callback is called any time a cell is edited.
+            console.log(cell.getRow().getData())
+            $.ajax({
 
+                url: '/subjects/' + cell.getRow().getData().id,
+                method: 'PATCH',
+                dataType: 'json',
+                data: {enrollment: cell.getRow().getData()},
+                success: function () {
+                    toastr.info('Edit was successful!')
+                    alert('Edit was successful!')
+                    table.replaceData()
+                },
+                error: function () {
+                    alert('Edit was not successful!')
+                }
+
+            })
+        },
     });
-</script>
-<%= link_to 'New Course', new_course_path %>
 
+    $(document).ready(function () {
+        table.setData("/subjects");
+    });
+
+</script>
+<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Subject</button>
 
 <%= link_to 'New Subject', new_subject_path %>

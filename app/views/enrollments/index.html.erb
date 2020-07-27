@@ -1,54 +1,22 @@
-<div id="example-table"></div>
+<div id="table"></div>
+
+<% content_for :modal do %>
+  <% render 'form', enrollment:Enrollment.new %>
+<% end %>
 
 <script>
-
-
-    var courseMutator = function(value, data, type, params, component){
-        var responseData;
-        console.log(data)
-        $.ajaxSetup({async: false});
-        $.ajax({
-            url: '/courses/'+data.course_id,
-            dataType: 'json',
-            success: function (data) {
-                responseData = data.title;
-            },
-            error: function () {
-                responseData = 'Not Found!';
-            }
-        });
-        $.ajaxSetup({async: true});
-        return responseData;
-    }
-
-    var userMutator = function(value, data, type, params, component){
-        var responseData;
-        console.log(data)
-        $.ajaxSetup({async: false});
-        $.ajax({
-            url: '/admin/user/'+data.user_id,
-            dataType: 'json',
-            success: function (data) {
-                responseData = data.email;
-            },
-            error: function() {
-                responseData = 'Not Found!';
-            }
-        });
-        $.ajaxSetup({async: true});
-        return responseData;
-    }
-
+    MicroModal.close('modal-1');
     //Build Tabulator
-    var table = new Tabulator("#example-table", {
+    var table = new Tabulator("#table", {
         height: "311px",
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
             {title: "User ID", field: "user_id", sorter: "string", width: 200, editor: true},
-            {title: "User Email", field: "user_mail",  mutator:userMutator, sorter: "string", width: 200, editor: false},
+            {title: "User Email", field: "user_mail",  formatter:userFormatter(), sorter: "string", width: 200, editor: false},
             {title: "Course ID", field: "course_id", sorter: "number", editor: true},
-            {title: "Course Name",  mutator:courseMutator,field: "course_name", sorter: "number", editor: false}
+            {title: "Course Name",  formatter:courseFormatter,field: "course_name", sorter: "number", editor: false},
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
         ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
@@ -77,5 +45,4 @@
     });
 
 </script>
-
-<%= link_to 'New Course', new_course_path %>
+<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Enrollment</button>

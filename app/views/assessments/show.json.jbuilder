@@ -1,1 +1,1 @@
-json.partial! "assessments/assesment", assesment: @assesment
+json.partial! "assessments/assessment", assessment: @assessment

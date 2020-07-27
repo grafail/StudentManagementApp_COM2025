@@ -39,3 +39,128 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+
+var courseFormatter = function(cell){
+    data = cell.getRow().getData();
+    var responseData;
+    $.ajax({
+        url: '/courses/'+data.course_id,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            responseData = data.title;
+        },
+        error: function () {
+            responseData = 'Not Found!';
+        }
+    });
+    return responseData;
+}
+
+var userFormatter = function(cell){
+    data = cell.getRow().getData();
+    var responseData;
+    $.ajax({
+        url: '/admin/user/'+data.user_id,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            responseData = data.email;
+        },
+        error: function() {
+            responseData = 'Not Found!';
+        }
+    });
+    return responseData;
+}
+
+var assessmentFormatter = function(cell){
+    data = cell.getRow().getData();
+    var responseData;
+    $.ajax({
+        url: '/assessments/'+data.assessment_id,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            responseData = data.title;
+        },
+        error: function() {
+            responseData = 'Not Found!';
+        }
+    });
+    return responseData;
+}
+
+var subjectFormatter = function(cell){
+    data = cell.getRow().getData();
+    var responseData;
+    $.ajax({
+        url: '/subjects/'+data.subject_id,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            responseData = data.title;
+        },
+        error: function() {
+            responseData = 'Not Found!';
+        }
+    });
+    return responseData;
+}
+
+var deleteItem = function(e,cell){
+    $.ajax({
+
+        url: table.getAjaxUrl()+'/'+cell.getRow().getData().id,
+        method: 'DELETE',
+        dataType: 'json',
+        success: function () {
+            toastr.info('Removal was successful!')
+            cell.getRow().delete();
+        },
+        error: function () {
+            toastr.info('Removal was not successful!')
+        }
+
+    })
+}
+
+var submitForm = function(){
+    formData = $('form').serialize();
+    console.log(formData);
+    $.ajax({
+        url: table.getAjaxUrl(),
+        method: 'POST',
+        dataType: 'json',
+        data: formData,
+        success: function () {
+            toastr.info('Edit was successful!')
+            table.replaceData();
+        },
+        error: function () {
+            toastr.error('Edit was not successful!')
+        }
+
+    })
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    try {
+
+        MicroModal.init({
+            awaitCloseAnimation: true,// set to false, to remove close animation
+            onShow: function(modal) {
+                console.log("micromodal open");
+            },
+            onClose: function(modal) {
+                console.log(modal)
+                console.log("micromodal close");
+            }
+        });
+
+    } catch (e) {
+        console.log("micromodal error: ", e);
+    }
+
+});

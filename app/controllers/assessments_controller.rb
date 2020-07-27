@@ -1,10 +1,10 @@
 class AssessmentsController < ApplicationController
-  before_action :set_assesment, only: [:show, :edit, :update, :destroy]
+  before_action :set_assessment, only: [:show, :edit, :update, :destroy]
 
   # GET /assessments
   # GET /assessments.json
   def index
-    @assesments = Assesment.all
+    @assessments = Assessment.all
   end
 
   # GET /assessments/1
@@ -14,7 +14,7 @@ class AssessmentsController < ApplicationController
 
   # GET /assessments/new
   def new
-    @assesment = Assesment.new
+    @assessment = Assessment.new
   end
 
   # GET /assessments/1/edit
@@ -24,15 +24,15 @@ class AssessmentsController < ApplicationController
   # POST /assessments
   # POST /assessments.json
   def create
-    @assesment = Assesment.new(assesment_params)
+    @assessment = Assessment.new(assessment_params)
 
     respond_to do |format|
-      if @assesment.save
-        format.html { redirect_to @assesment, notice: 'Assesment was successfully created.' }
-        format.json { render :show, status: :created, location: @assesment }
+      if @assessment.save
+        format.html { redirect_to @assessment, notice: 'Assessment was successfully created.' }
+        format.json { render :show, status: :created, location: @assessment }
       else
         format.html { render :new }
-        format.json { render json: @assesment.errors, status: :unprocessable_entity }
+        format.json { render json: @assessment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +41,12 @@ class AssessmentsController < ApplicationController
   # PATCH/PUT /assessments/1.json
   def update
     respond_to do |format|
-      if @assesment.update(assesment_params)
-        format.html { redirect_to @assesment, notice: 'Assesment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @assesment }
+      if @assessment.update(assessment_params)
+        format.html { redirect_to @assessment, notice: 'Assessment was successfully updated.' }
+        format.json { render :show, status: :ok, location: @assessment }
       else
         format.html { render :edit }
-        format.json { render json: @assesment.errors, status: :unprocessable_entity }
+        format.json { render json: @assessment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,21 +54,21 @@ class AssessmentsController < ApplicationController
   # DELETE /assessments/1
   # DELETE /assessments/1.json
   def destroy
-    @assesment.destroy
+    @assessment.destroy
     respond_to do |format|
-      format.html { redirect_to assessments_url, notice: 'Assesment was successfully destroyed.' }
+      format.html { redirect_to assessments_url, notice: 'Assessment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_assesment
-      @assesment = Assesment.find(params[:id])
+    def set_assessment
+      @assessment = Assessment.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def assesment_params
-      params.require(:assesment).permit(:subject_id, :name)
+    def assessment_params
+      params.require(:assessment).permit(:subject_id, :name)
     end
 end

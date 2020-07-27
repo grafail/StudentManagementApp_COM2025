@@ -1,22 +1,48 @@
-<table id="table">
-  <thead>
-  <tr>
-    <th data-field="assessment">Assessment</th>
-    <th data-field="user">User</th>
-    <th data-field="grade">Grade</th>
-  </tr>
-  </thead>
-</table>
+<div id="table"></div>
+
+<% content_for :modal do %>
+  <% render 'form', grade:Grade.new %>
+<% end %>
+
 <script>
-    $(document).ready(function () {
-        var $table = $('#table')
+    var table = new Tabulator("#table", {
+        height: "311px",
+        layout: "fitColumns",
+        placeholder: "No Data Set",
+        columns: [
+            {title: "Assessment ID", field: "assessment_id", sorter: "string", width: 200, editor: true},
+            {title: "Assessment Title", field: "assessment_id", sorter: "string", width: 200, editor: false},
+            {title: "User ID", field: "user_id", sorter: "number", editor: true},
+            {title: "User Email", field: "user_id", sorter: "string", editor: false},
+            {title: "Grade", field: "grade", sorter: "number", editor: false},
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+        ],
+        cellEdited: function (cell) {
+            // This callback is called any time a cell is edited.
+            console.log(cell.getRow().getData())
+            $.ajax({
 
-        $(function() {
-            var data = <%= GradesHelper.to_data_html(@grades) %>
-                $table.bootstrapTable({data: data})
-        })
+                url: '/grades/'+cell.getRow().getData().id,
+                method: 'PATCH',
+                dataType: 'json',
+                data: {grade: cell.getRow().getData()},
+                success: function () {
+                    toastr.info('Edit was successful!')
+                    alert('Edit was successful!')
+                    table.replaceData()
+                },
+                error: function () {
+                    alert('Edit was not successful!')
+                }
 
+            })
+        },
     });
-</script>
 
-<%= link_to 'New Grade', new_grade_path %>
+    $(document).ready(function () {
+        table.setData("/grades");
+    });
+
+</script>
+<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Assessment</button>
+
