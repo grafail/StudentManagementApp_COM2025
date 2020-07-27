@@ -1,4 +1,4 @@
-module AssesmentsHelper
+module AssessmentsHelper
   def self.to_data_html(assessments)
     cnt = 0
     data_str = '['

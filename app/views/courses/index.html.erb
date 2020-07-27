@@ -1,101 +1,41 @@
-<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content"></div>
-  </div>
-</div>
-
-<table id="table">
-  <thead>
-  <tr>
-    <th data-field="id">ID</th>
-    <th data-field="title">Title</th>
-    <th data-field="year">Year</th>
-  </tr>
-  </thead>
-</table>
-
-<style>
-  .like {
-    margin-right: 10px;
-  }
-</style>
-
-
-<table
-  id="table"
-  data-id-field="id">
-</table>
+<div id="example-table"></div>
 
 <script>
-    var $table = $('#table')
-    var $remove = $('#remove')
-    var selections = []
-
-    function operateFormatter(value, row, index) {
-        return [
-            '<a class="like" href="/courses/'+row.id+'/edit" title="Like" data-remote="true" data-toggle="modal" data-target="modal-window">',
-            '<i class="fa fa-pencil-alt"></i>',
-            '</a>  ',
-            '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="fa fa-trash"></i>',
-            '</a>'
-        ].join('')
-    }
-
-    window.operateEvents = {
-    //    'click .like': function (e, value, row, index) {
-     //       alert('You clicked the edit action, row: ' + JSON.stringify(row))
-      //  },
-        'click .remove': function (e, value, row, index) {
-
+    //Build Tabulator
+    var table = new Tabulator("#example-table", {
+        height: "311px",
+        layout: "fitColumns",
+        placeholder: "No Data Set",
+        columns: [
+            {title: "ID", field: "id", sorter: "string", width: 200, editor: true},
+            {title: "Title", field: "title", sorter: "number", editor: true},
+            {title: "Year", field: "year", sorter: "string", editor: true}
+        ],
+        cellEdited: function (cell) {
+            // This callback is called any time a cell is edited.
+            console.log(cell.getRow().getData())
             $.ajax({
-                url : ('/courses/'+row.id),
-                type : 'DELETE',
-                dataType : 'json',
-                success : function(e) {
-                    $table.bootstrapTable('remove', {
-                        field: 'id',
-                        values: [row.id]
-                    })
+
+                url: '/courses/'+cell.getRow().getData().id,
+                method: 'PATCH',
+                dataType: 'json',
+                data: {course: cell.getRow().getData()},
+                success: function () {
+                    toastr.info('Edit was successful!')
+                    alert('Edit was successful!')
+                },
+                error: function () {
+                    alert('Edit was not successful!')
                 }
-            });
-        }
-    }
 
-    function initTable() {
-        $table.bootstrapTable('destroy').bootstrapTable({
-            data: <%= to_data_html(@courses) %>,
-            height: '550',
-            columns: [
-                [{
-                    field: 'id',
-                    title: 'Course ID',
-                    sortable: true,
-                    align: 'center'
-                }, {
-                    field: 'title',
-                    title: 'Course Title',
-                    sortable: true,
-                    align: 'center'
-                }, {
-                    field: 'year',
-                    title: 'Year',
-                    sortable: true,
-                    align: 'center'
-                }, {
-                    field: 'operate',
-                    align: 'center',
-                    clickToSelect: false,
-                    events: window.operateEvents,
-                    formatter: operateFormatter
-                }]
-            ]
-        })
-    }
+            })
+        },
+    });
 
-    $(function() {
-        initTable()
-    })
+    $(document).ready(function () {
+        table.setData("/courses");
+    });
+
 </script>
 
 <%= link_to 'New Course', new_course_path %>

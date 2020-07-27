@@ -12,12 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2020_07_25_014049) do
 
-  create_table "assesments", force: :cascade do |t|
+  create_table "assessments", force: :cascade do |t|
     t.integer "subject_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_id"], name: "index_assesments_on_subject_id"
+    t.index ["subject_id"], name: "index_assessments_on_subject_id"
   end
 
   create_table "courses", force: :cascade do |t|

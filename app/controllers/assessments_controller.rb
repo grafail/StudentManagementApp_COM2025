@@ -1,28 +1,28 @@
-class AssesmentsController < ApplicationController
+class AssessmentsController < ApplicationController
   before_action :set_assesment, only: [:show, :edit, :update, :destroy]
 
-  # GET /assesments
-  # GET /assesments.json
+  # GET /assessments
+  # GET /assessments.json
   def index
     @assesments = Assesment.all
   end
 
-  # GET /assesments/1
-  # GET /assesments/1.json
+  # GET /assessments/1
+  # GET /assessments/1.json
   def show
   end
 
-  # GET /assesments/new
+  # GET /assessments/new
   def new
     @assesment = Assesment.new
   end
 
-  # GET /assesments/1/edit
+  # GET /assessments/1/edit
   def edit
   end
 
-  # POST /assesments
-  # POST /assesments.json
+  # POST /assessments
+  # POST /assessments.json
   def create
     @assesment = Assesment.new(assesment_params)
 
@@ -37,8 +37,8 @@ class AssesmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assesments/1
-  # PATCH/PUT /assesments/1.json
+  # PATCH/PUT /assessments/1
+  # PATCH/PUT /assessments/1.json
   def update
     respond_to do |format|
       if @assesment.update(assesment_params)
@@ -51,12 +51,12 @@ class AssesmentsController < ApplicationController
     end
   end
 
-  # DELETE /assesments/1
-  # DELETE /assesments/1.json
+  # DELETE /assessments/1
+  # DELETE /assessments/1.json
   def destroy
     @assesment.destroy
     respond_to do |format|
-      format.html { redirect_to assesments_url, notice: 'Assesment was successfully destroyed.' }
+      format.html { redirect_to assessments_url, notice: 'Assesment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

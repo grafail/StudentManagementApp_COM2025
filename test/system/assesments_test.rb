@@ -6,12 +6,12 @@ class AssesmentsTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit assesments_url
+    visit assessments_url
     assert_selector "h1", text: "Assesments"
   end
 
   test "creating a Assesment" do
-    visit assesments_url
+    visit assessments_url
     click_on "New Assesment"
 
     fill_in "Name", with: @assesment.name
@@ -23,7 +23,7 @@ class AssesmentsTest < ApplicationSystemTestCase
   end
 
   test "updating a Assesment" do
-    visit assesments_url
+    visit assessments_url
     click_on "Edit", match: :first
 
     fill_in "Name", with: @assesment.name
@@ -35,7 +35,7 @@ class AssesmentsTest < ApplicationSystemTestCase
   end
 
   test "destroying a Assesment" do
-    visit assesments_url
+    visit assessments_url
     page.accept_confirm do
       click_on "Destroy", match: :first
     end

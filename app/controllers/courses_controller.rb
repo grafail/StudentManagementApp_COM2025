@@ -4,7 +4,6 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    require 'json'
     @courses = Course.all
   end
 
@@ -20,10 +19,6 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   # POST /courses
@@ -47,10 +42,10 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to courses_path, notice: 'Course was successfully updated.' }
+        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
-        format.html { render courses_path, notice: 'Course was not successfully updated.' }
+        format.html { render :new}
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end

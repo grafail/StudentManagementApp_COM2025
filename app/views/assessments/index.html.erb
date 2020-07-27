@@ -17,7 +17,7 @@
         <td><%= assesment.subject %></td>
         <td><%= assesment.name %></td>
         <td><%= link_to 'Show', assesment %></td>
-        <td><%= link_to 'Edit', edit_assesment_path(assesment) %></td>
+        <td><%= link_to 'Edit', edit_assessment_path(assesment) %></td>
         <td><%= link_to 'Destroy', assesment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Assesment', new_assesment_path %>
+<%= link_to 'New Assesment', new_assessment_path %>

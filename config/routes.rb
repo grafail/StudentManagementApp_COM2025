@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   get 'admin/index'
+  get 'admin/user/:id' => "admin#user"
   devise_for :users
   resources :subjects
-  resources :assesments
+  resources :assessments
   resources :enrollments
   resources :grades
   resources :courses
