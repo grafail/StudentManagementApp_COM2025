@@ -22,7 +22,6 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.5.0'
 
 gem "devise"
-gem 'cancancan'
 gem 'rolify'
 
 # Use CoffeeScript for .coffee assets and views

@@ -38,7 +38,7 @@
                 url: '/subjects/' + cell.getRow().getData().id,
                 method: 'PATCH',
                 dataType: 'json',
-                data: {enrollment: cell.getRow().getData()},
+                data: {subject: cell.getRow().getData()},
                 success: function () {
                     toastr.info('Edit was successful!')
                     alert('Edit was successful!')

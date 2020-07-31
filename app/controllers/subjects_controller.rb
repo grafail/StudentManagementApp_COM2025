@@ -41,7 +41,7 @@ class SubjectsController < ApplicationController
   # PATCH/PUT /subjects/1.json
   def update
     respond_to do |format|
-      if @subject.update(subject_params)
+      if (current_user.has_role?(:admin) || current_user.has_role?(:staff)) && @subject.update(subject_params)
         format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
         format.json { render :show, status: :ok, location: @subject }
       else
