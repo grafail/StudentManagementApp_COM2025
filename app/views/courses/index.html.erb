@@ -1,3 +1,5 @@
+<hr style="clear:both;visibility:hidden;">
+<h1 style="text-align: center;">Manage courses</h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
@@ -10,7 +12,7 @@
 
     //Build Tabulator
     var table = new Tabulator("#table", {
-        height: "311px",
+        maxHeight: "85%",
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
@@ -44,3 +46,4 @@
 
 </script>
 <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Course</button>
+<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>

@@ -1,3 +1,5 @@
+<hr style="clear:both;visibility:hidden;">
+<h1 style="text-align: center;">Manage grades</h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
@@ -6,7 +8,7 @@
 
 <script>
     var table = new Tabulator("#table", {
-        height: "311px",
+        maxHeight: "85%",
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
@@ -45,4 +47,4 @@
 
 </script>
 <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Assessment</button>
-
+<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>
