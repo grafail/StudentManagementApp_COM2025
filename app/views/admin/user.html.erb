@@ -1,0 +1,33 @@
+
+
+
+
+<div class="container" style="height: 90vh;">
+  <div class="row align-items-center" id="mainMenuRow">
+    <div class="col">
+      <div class="card text-center" style="width: 21.5em;margin:0 auto;">
+        <div class="card-body">
+          <p>
+            <strong>Email: </strong> <%= @user.email %>
+          </p>
+          <p>
+            <strong>User ID: </strong> <%= @user.id %>
+          </p>
+          <% if @user.course_id!=nil %>
+            <% course = Course.find_by(id:@user.course_id) %>
+            <p>
+              <strong>Course ID: </strong> <%=  course.id %>
+            </p>
+            <p>
+              <strong>Course Name: </strong> <%= course %>
+            </p>
+            <p>
+              <%=link_to "Back to homepage", root_path %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
