@@ -1,10 +1,17 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
+  before_action :checkNotStudent, only: [:edit, :update, :destroy]
 
   # GET /enrollments
   # GET /enrollments.json
   def index
-    @enrollments = Enrollment.all
+    if current_user.has_role? :admin
+      @enrollments = Enrollment.all
+    elsif current_user.has_role? :student
+      @enrollments = Enrollment.with_student(current_user)
+    elsif current_user.has_role? :staff
+      @enrollments = Enrollment.with_lecturer(current_user)
+    end
   end
 
   # GET /enrollments/1
@@ -73,6 +80,6 @@ class EnrollmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def enrollment_params
-      params.require(:enrollment).permit(:user_id, :course_id)
+      params.require(:enrollment).permit(:user_id, :subject_id)
     end
 end

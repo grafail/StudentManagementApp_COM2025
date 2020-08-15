@@ -15,8 +15,8 @@
         columns: [
             {title: "User ID", field: "user_id", sorter: "string", width: 200, editor: true},
             {title: "User Email", field: "user_id",  formatter:userFormatter, sorter: "string", width: 200, editor: false},
-            {title: "Course ID", field: "course_id", sorter: "number", editor: true},
-            {title: "Course Name", field: "course_id",  formatter:courseFormatter,field: "course_name", sorter: "number", editor: false},
+            {title: "Subject ID", field: "subject_id", sorter: "number", editor: true},
+            {title: "Subject Name", field: "subject_id",  formatter:subjectFormatter, sorter: "number", editor: false},
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
         ],
         cellEdited: function (cell) {
@@ -29,12 +29,12 @@
                 dataType: 'json',
                 data: {enrollment: cell.getRow().getData()},
                 success: function () {
-                    toastr.info('Edit was successful!')
-                    alert('Edit was successful!')
+                    toastr.success('Edit was successful!')
                     table.replaceData()
                 },
                 error: function () {
-                    alert('Edit was not successful!')
+                    toastr.error('Incorrect input or insufficient access!')
+                    table.replaceData()
                 }
 
             })
