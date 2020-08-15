@@ -8,8 +8,6 @@
 
 <script>
 
-
-
     //Build Tabulator
     var table = new Tabulator("#table", {
         maxHeight: "85%",
@@ -29,11 +27,11 @@
                 dataType: 'json',
                 data: {course: cell.getRow().getData()},
                 success: function () {
-                    toastr.info('Edit was successful!')
-                    alert('Edit was successful!')
+                    toastr.success('Edit was successful!')
                 },
                 error: function () {
-                    alert('Edit was not successful!')
+                    toastr.error('Incorrect input or insufficient access!')
+                    table.replaceData()
                 }
 
             })

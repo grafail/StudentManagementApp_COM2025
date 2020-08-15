@@ -27,12 +27,12 @@
                 dataType: 'json',
                 data: {assessment: cell.getRow().getData()},
                 success: function () {
-                    toastr.info('Edit was successful!')
-                    alert('Edit was successful!')
+                    toastr.success('Edit was successful!')
                     table.replaceData()
                 },
                 error: function () {
-                    alert('Edit was not successful!')
+                    toastr.error('Incorrect input or insufficient access!')
+                    table.replaceData()
                 }
 
             })

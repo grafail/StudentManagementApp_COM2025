@@ -1,10 +1,17 @@
 class AssessmentsController < ApplicationController
   before_action :set_assessment, only: [:show, :edit, :update, :destroy]
+  before_action :checkNotStudent, only: [:edit, :update, :destroy]
 
   # GET /assessments
   # GET /assessments.json
   def index
-    @assessments = Assessment.all
+    if current_user.has_role? :admin
+      @assessments = Assessment.all
+    elsif current_user.has_role? :student
+      @assessments = Assessment.with_student(current_user)
+    elsif current_user.has_role? :staff
+      @assessments = Assessment.with_lecturer(current_user)
+    end
   end
 
   # GET /assessments/1

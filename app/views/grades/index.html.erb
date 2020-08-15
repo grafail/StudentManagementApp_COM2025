@@ -29,12 +29,12 @@
                 dataType: 'json',
                 data: {grade: cell.getRow().getData()},
                 success: function () {
-                    toastr.info('Edit was successful!')
-                    alert('Edit was successful!')
+                    toastr.success('Edit was successful!')
                     table.replaceData()
                 },
                 error: function () {
-                    alert('Edit was not successful!')
+                    toastr.error('Incorrect input or insufficient access!')
+                    table.replaceData()
                 }
 
             })
@@ -46,5 +46,5 @@
     });
 
 </script>
-<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Assessment</button>
+<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Grade</button>
 <button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>

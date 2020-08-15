@@ -13,6 +13,10 @@
     <% if signed_in? %>
       <div style="color:white;"> Signed in as: <%= current_user.email %> </div>
       <div class="vl"></div>
+      <% if current_user.roles_name.size==1 %>
+        <div style="color:white;">(<%= current_user.roles_name[0].capitalize %> Mode)</div>
+        <div class="vl"></div>
+      <% end %>
       <%= button_to t('header.sign_out'), destroy_user_session_path, method: :delete, :id => "loginButton", :class => "btn btn-primary ml-auto" %>
     <% end %>
   </div>

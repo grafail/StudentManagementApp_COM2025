@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_102520) do
+ActiveRecord::Schema.define(version: 2020_08_15_175730) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "subject_id"
@@ -29,20 +29,20 @@ ActiveRecord::Schema.define(version: 2020_07_27_102520) do
 
   create_table "enrollments", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "course_id"
+    t.integer "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["subject_id"], name: "index_enrollments_on_subject_id"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "grades", force: :cascade do |t|
-    t.integer "assesment_id"
+    t.integer "assessment_id"
     t.integer "user_id"
     t.float "grade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assesment_id"], name: "index_grades_on_assesment_id"
+    t.index ["assessment_id"], name: "index_grades_on_assessment_id"
     t.index ["user_id"], name: "index_grades_on_user_id"
   end
 
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_102520) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

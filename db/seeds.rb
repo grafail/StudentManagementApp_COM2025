@@ -1,6 +1,6 @@
 User.create!([
   {email: "test@example.org", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil},
-  {email: "test2@example.org", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil}
+  {email: "test2@example.org", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, course_id: 1}
 ])
 Course.create!([
   {title: "Computer Science", year: 2020},

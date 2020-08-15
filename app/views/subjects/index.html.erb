@@ -1,9 +1,14 @@
 <hr style="clear:both;visibility:hidden;">
-<h1 style="text-align: center;">Manage subjects</h1>
+<h1 style="text-align: center;">
+  <% if current_user.has_role? :staff %>
+    Manage My Subjects
+  <% else %>
+    Manage All Subjects
+  <% end %></h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
-  <% render 'form', subject:Subject.new %>
+  <% render 'form', subject: Subject.new %>
 <% end %>
 
 <script>
@@ -12,7 +17,7 @@
     var table = new Tabulator("#table", {
         maxHeight: "85%",
         layout: "fitColumns",
-        ajaxResponse:function(url, params, response){
+        ajaxResponse: function (url, params, response) {
             //url - the URL of the request
             //params - the parameters passed with the request
             //response - the JSON object returned in the body of the response.
@@ -21,14 +26,28 @@
         },
         placeholder: "No Data Set",
         columns: [
-            {title: "Subject ID", field: "id", sorter: "string", width: 200, editor: true},
-            {title: "Course ID", field: "course_id", sorter: "string", width: 200, editor: true},
-            {title: "Course Name", field: "course_id", formatter: courseFormatter, sorter: "string", width: 200, editor: false},
-            {title: "Lecturer ID", field: "user_id", sorter: "string", width: 200, editor: true},
-            {title: "Lecturer Name", field: "user_id", formatter: userFormatter, sorter: "string", width: 200, editor: false},
+            {title: "Subject ID", field: "id", sorter: "string", width: 200, editor: <%= @editStatus %>},
+            {title: "Course ID", field: "course_id", sorter: "string", width: 200, editor: <%= @editStatus %>},
+            {
+                title: "Course Name",
+                field: "course_id",
+                formatter: courseFormatter,
+                sorter: "string",
+                width: 200,
+                editor: false
+            },
+            {title: "Lecturer ID", field: "user_id", sorter: "string", width: 200, editor: <%= @editStatus %>},
+            {
+                title: "Lecturer Name",
+                field: "user_id",
+                formatter: userFormatter,
+                sorter: "string",
+                width: 200,
+                editor: false
+            },
             {title: "Title", field: "title", sorter: "string", editor: true},
             {title: "Description", field: "description", sorter: "string", editor: false},
-            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+            {formatter: "buttonCross", width: 40, align: "center", cellClick: deleteItem}
         ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
@@ -40,12 +59,12 @@
                 dataType: 'json',
                 data: {subject: cell.getRow().getData()},
                 success: function () {
-                    toastr.info('Edit was successful!')
-                    alert('Edit was successful!')
+                    toastr.success('Edit was successful!')
                     table.replaceData()
                 },
                 error: function () {
-                    alert('Edit was not successful!')
+                    toastr.error('Incorrect input or insufficient access!')
+                    table.replaceData()
                 }
 
             })

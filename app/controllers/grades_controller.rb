@@ -1,15 +1,23 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
+  before_action :checkNotStudent, only: [:edit, :update, :destroy]
 
   # GET /grades
   # GET /grades.json
   def index
-    @grades = Grade.all
+    if current_user.has_role? :admin
+      @grades = Grade.all
+    elsif current_user.has_role? :student
+      @grades = Grade.with_student(current_user)
+    elsif current_user.has_role? :staff
+      @grades = Grade.with_lecturer(current_user)
+    end
   end
 
   # GET /grades/1
   # GET /grades/1.json
   def show
+    puts self
   end
 
   # GET /grades/new
@@ -69,6 +77,6 @@ class GradesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def grade_params
-      params.require(:grade).permit(:assesment_id, :user_id, :grade)
+      params.require(:grade).permit(:assessment_id, :user_id, :grade)
     end
 end

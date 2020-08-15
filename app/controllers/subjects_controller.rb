@@ -1,10 +1,19 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :checkNotStudent, only: [:edit, :update, :destroy]
 
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.all
+    @editStatus = 'true'
+    if current_user.has_role? :admin
+      @subjects = Subject.all
+    elsif current_user.has_role? :staff
+      @subjects = Subject.with_lecturer(current_user)
+    elsif current_user.has_role? :student
+      @subjects = Subject.student_can_enroll(current_user)
+      @editStatus = 'false'
+    end
   end
 
   # GET /subjects/1
@@ -41,11 +50,11 @@ class SubjectsController < ApplicationController
   # PATCH/PUT /subjects/1.json
   def update
     respond_to do |format|
-      if (current_user.has_role?(:admin) || current_user.has_role?(:staff)) && @subject.update(subject_params)
+      if (current_user.has_role?(:admin) || current_user.has_role?(:staff)) and @subject.update(subject_params)
         format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
         format.json { render :show, status: :ok, location: @subject }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: 'Subject was successfully updated.' }
         format.json { render json: @subject.errors, status: :unprocessable_entity }
       end
     end

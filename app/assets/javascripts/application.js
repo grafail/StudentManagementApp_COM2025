@@ -40,11 +40,11 @@ toastr.options = {
     "hideMethod": "fadeOut"
 }
 
-var courseFormatter = function(cell){
+var courseFormatter = function (cell) {
     data = cell.getRow().getData();
     var responseData;
     $.ajax({
-        url: '/courses/'+data.course_id,
+        url: '/courses/' + data.course_id,
         dataType: 'json',
         async: false,
         success: function (data) {
@@ -57,76 +57,77 @@ var courseFormatter = function(cell){
     return responseData;
 }
 
-var userFormatter = function(cell){
+var userFormatter = function (cell) {
     data = cell.getRow().getData();
     var responseData;
     $.ajax({
-        url: '/admin/user/'+data.user_id,
+        url: '/admin/user/' + data.user_id,
         dataType: 'json',
         async: false,
         success: function (data) {
             responseData = data.email;
         },
-        error: function() {
+        error: function () {
             responseData = 'Not Found!';
         }
     });
     return responseData;
 }
 
-var assessmentFormatter = function(cell){
+var assessmentFormatter = function (cell) {
     data = cell.getRow().getData();
     var responseData;
     $.ajax({
-        url: '/assessments/'+data.assessment_id,
+        url: '/assessments/' + data.assessment_id,
         dataType: 'json',
         async: false,
         success: function (data) {
             responseData = data.title;
         },
-        error: function() {
+        error: function () {
             responseData = 'Not Found!';
         }
     });
     return responseData;
 }
 
-var subjectFormatter = function(cell){
+var subjectFormatter = function (cell) {
     data = cell.getRow().getData();
     var responseData;
     $.ajax({
-        url: '/subjects/'+data.subject_id,
+        url: '/subjects/' + data.subject_id,
         dataType: 'json',
         async: false,
         success: function (data) {
             responseData = data.title;
         },
-        error: function() {
+        error: function () {
             responseData = 'Not Found!';
         }
     });
     return responseData;
 }
 
-var deleteItem = function(e,cell){
+var deleteItem = function (e, cell) {
     $.ajax({
 
-        url: table.getAjaxUrl()+'/'+cell.getRow().getData().id,
+        url: table.getAjaxUrl() + '/' + cell.getRow().getData().id,
         method: 'DELETE',
         dataType: 'json',
         success: function () {
-            toastr.info('Removal was successful!')
+            toastr.success('Removal was successful!')
             cell.getRow().delete();
         },
         error: function () {
-            toastr.info('Removal was not successful!')
+            toastr.error('Removal was not successful!')
         }
 
     })
 }
 
-var submitForm = function(){
-    formData = $('form').serialize();
+var submitForm = function () {
+    //Find form inside modal
+    let formData = $('#modal-1').find('form').serialize();
     console.log(formData);
     $.ajax({
         url: table.getAjaxUrl(),
@@ -134,26 +135,26 @@ var submitForm = function(){
         dataType: 'json',
         data: formData,
         success: function () {
-            toastr.info('Edit was successful!')
+            toastr.success('Submission was successful!')
             table.replaceData();
         },
         error: function () {
-            toastr.error('Edit was not successful!')
+            toastr.error('Submission was not successful!')
         }
 
     })
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
     try {
 
         MicroModal.init({
             awaitCloseAnimation: true,// set to false, to remove close animation
-            onShow: function(modal) {
+            onShow: function (modal) {
                 console.log("micromodal open");
             },
-            onClose: function(modal) {
+            onClose: function (modal) {
                 console.log(modal)
                 console.log("micromodal close");
             }

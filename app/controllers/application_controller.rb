@@ -1,14 +1,13 @@
 class ApplicationController < ActionController::Base
-  before_action :set_cache_headers
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
-  private
+  def checkIfAdmin
+    redirect_to root_path, notice: 'You do not have permission to view this page!' unless current_user.has_role? :admin
+  end
 
-  def set_cache_headers
-    response.headers["Cache-Control"] = "no-cache, no-store"
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
+  def checkNotStudent
+    redirect_to root_path, notice: 'You do not have permission to view this page!' if current_user.has_role? :student
   end
 
 end
