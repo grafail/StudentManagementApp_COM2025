@@ -5,7 +5,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :user, optional: true
+  has_many :enrollments, dependent: :destroy
+  has_many :grades, dependent: :destroy
+
+  belongs_to :course, optional: true
 
   def before_add_method(role)
     self.roles = []
