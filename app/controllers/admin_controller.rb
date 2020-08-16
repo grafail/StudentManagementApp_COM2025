@@ -18,7 +18,10 @@ class AdminController < ApplicationController
         format.json { render json: @user, content_type: 'application/json' }
       end
     else
-      redirect_to root_path, notice: 'You do not have permission to view this page!' unless current_user.has_role? :admin
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'You do not have permission to view this page!' unless current_user.has_role? :admin }
+        format.json { render json: @user, content_type: 'application/json' }
+      end
     end
   end
 

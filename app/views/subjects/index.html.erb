@@ -2,9 +2,12 @@
 <h1 style="text-align: center;">
   <% if current_user.has_role? :staff %>
     Manage My Subjects
+  <% elsif current_user.has_role? :student %>
+    Enroll to new subject
   <% else %>
     Manage All Subjects
-  <% end %></h1>
+  <% end %>
+</h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
@@ -26,8 +29,8 @@
         },
         placeholder: "No Data Set",
         columns: [
-            {title: "Subject ID", field: "id", sorter: "string", width: 200, editor: <%= @editStatus %>},
-            {title: "Course ID", field: "course_id", sorter: "string", width: 200, editor: <%= @editStatus %>},
+            {title: "Subject ID", field: "id", sorter: "string", editor: <%= @editStatus %>},
+            {title: "Course ID", field: "course_id", sorter: "string", editor: <%= @editStatus %>},
             {
                 title: "Course Name",
                 field: "course_id",
@@ -36,7 +39,7 @@
                 width: 200,
                 editor: false
             },
-            {title: "Lecturer ID", field: "user_id", sorter: "string", width: 200, editor: <%= @editStatus %>},
+            {title: "Lecturer ID", field: "user_id", sorter: "string", editor: <%= @editStatus %>},
             {
                 title: "Lecturer Name",
                 field: "user_id",
@@ -47,8 +50,11 @@
             },
             {title: "Title", field: "title", sorter: "string", editor: true},
             {title: "Description", field: "description", sorter: "string", editor: false},
-            {formatter: "buttonCross", width: 40, align: "center", cellClick: deleteItem}
-        ],
+            <% if current_user.has_role? :admin %>
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem},
+            <% elsif  current_user.has_role? :student%>
+            {formatter:addIcon, width:40, align:"center", cellClick:enrollToCourse}
+            <% end %>        ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
             console.log(cell.getRow().getData())

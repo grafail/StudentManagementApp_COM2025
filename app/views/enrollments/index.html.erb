@@ -1,5 +1,5 @@
 <hr style="clear:both;visibility:hidden;">
-<h1 style="text-align: center;">Manage enrollments</h1>
+<h1 style="text-align: center;"> Manage enrollments</h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
@@ -13,11 +13,13 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "User ID", field: "user_id", sorter: "string", width: 200, editor: true},
-            {title: "User Email", field: "user_id",  formatter:userFormatter, sorter: "string", width: 200, editor: false},
+            {title: "User ID", field: "user_id", sorter: "string", editor: true},
+            {title: "User Email", field: "user_id",  formatter:userFormatter, sorter: "string", editor: false},
             {title: "Subject ID", field: "subject_id", sorter: "number", editor: true},
             {title: "Subject Name", field: "subject_id",  formatter:subjectFormatter, sorter: "number", editor: false},
+            <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+            <% end %>
         ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.

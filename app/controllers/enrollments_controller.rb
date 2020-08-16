@@ -35,6 +35,10 @@ class EnrollmentsController < ApplicationController
   # POST /enrollments
   # POST /enrollments.json
   def create
+    #If user id is not specified in request, enroll current user (useful for javascript)
+    if(params[:enrollment]!=nil and params[:enrollment][:user_id]==nil and current_user!=nil)
+      params[:enrollment][:user_id]=current_user.id
+    end
     @enrollment = Enrollment.new(enrollment_params)
 
     respond_to do |format|

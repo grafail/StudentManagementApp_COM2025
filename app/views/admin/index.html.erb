@@ -1,22 +1,47 @@
-<h1>Listing users</h1>
+<hr style="clear:both;visibility:hidden;">
+<h1 style="text-align: center;">Manage users</h1>
+<div id="table"></div>
 
-<table>
-  <tr>
-    <th>User ID</th>
-    <th>Email Address</th>
-    <!--
-    <th>Admin</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    -->
-  </tr>
+<% content_for :modal do %>
+  <%# render 'form', user:Users.new %>
+<% end %>
 
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.id %></td>
-      <td><%= user.email %></td>
-      <td><%= link_to('Edit registration', edit_user_registration_path(user)) %></td>
+<script>
+    var table = new Tabulator("#table", {
+        maxHeight: "85%",
+        layout: "fitColumns",
+        placeholder: "No Data Set",
+        columns: [
+            {title: "User ID", field: "id", sorter: "number",  editor: true},
+            {title: "Email Address", field: "email", sorter: "string", editor: false},
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+        ],
+        cellEdited: function (cell) {
+            // This callback is called any time a cell is edited.
+            console.log(cell.getRow().getData())
+            $.ajax({
 
-    </tr>
-  <% end %>
-</table>
+                url: '/admin/users/'+cell.getRow().getData().id,
+                method: 'PATCH',
+                dataType: 'json',
+                data: {assessment: cell.getRow().getData()},
+                success: function () {
+                    toastr.success('Edit was successful!')
+                    table.replaceData()
+                },
+                error: function () {
+                    toastr.error('Incorrect input or insufficient access!')
+                    table.replaceData()
+                }
+
+            })
+        },
+    });
+
+    $(document).ready(function () {
+        table.setData("/admin/index");
+    });
+
+</script>
+<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New User</button>
+<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>

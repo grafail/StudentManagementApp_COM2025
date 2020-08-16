@@ -82,7 +82,7 @@ var assessmentFormatter = function (cell) {
         dataType: 'json',
         async: false,
         success: function (data) {
-            responseData = data.title;
+            responseData = data.name;
         },
         error: function () {
             responseData = 'Not Found!';
@@ -120,6 +120,30 @@ var deleteItem = function (e, cell) {
         },
         error: function () {
             toastr.error('Removal was not successful!')
+        }
+
+    })
+}
+var enrollToCourse = function (e, cell) {
+    console.log(e,cell);
+
+    enrollData = {
+        enrollment:{
+            //user_id: 2,
+            subject_id: cell.getData().id
+        }
+    }
+    $.ajax({
+        url: 'enrollments/',
+        method: 'POST',
+        dataType: 'json',
+        data: enrollData,
+        success: function () {
+            toastr.success('Enrollment was successful!');
+            table.replaceData();
+        },
+        error: function () {
+            toastr.error('Enrollment was not successful!')
         }
 
     })
@@ -165,3 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+var addIcon = function(cell, formatterParams, onRendered){ //plain text value
+    return "<i class='fa fa-plus'></i>";
+};

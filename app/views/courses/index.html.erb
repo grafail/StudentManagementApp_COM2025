@@ -14,10 +14,12 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "ID", field: "id", sorter: "string", width: 200, editor: false},
+            {title: "ID", field: "id", sorter: "string", editor: false},
             {title: "Title", field: "title", sorter: "number", editor: true},
             {title: "Year", field: "year", sorter: "string", editor: true},
+            <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+            <% end %>
         ],
         cellEdited: function (cell) {
             $.ajax({
