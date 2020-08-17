@@ -30,15 +30,24 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  app_name: "StudentApp"
   home:
     loginMessage: "Login from here to access."
     applicationName: "Student Management System"
     login: "Login"
+    contact_us: "Contact Us"
+    get_in_touch: "Complete the following form to get in touch with us."
+    request_contact:
+      no_email: "Email was not sent successfully!"
+      email_sent: "Email was sent successfully!"
   login_page: "Login Page"
   user_name: "User Name"
   password: "Password"
   header:
     sign_out: "Sign out"
+    signed_in_as: "Signed in as:"
   footer:
     copyright: "© StudentApp 2020. All Rights Reserved."
+
+
+

@@ -18,4 +18,5 @@ module ApplicationHelper
     data_str << ']'
     data_str.html_safe
   end
+
 end
