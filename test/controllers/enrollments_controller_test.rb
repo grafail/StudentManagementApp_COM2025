@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class EnrollmentsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @enrollment = enrollments(:one)
+    set_up_users
+    sign_in @admin
   end
 
   test "should get index" do
@@ -16,8 +20,9 @@ class EnrollmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create enrollment" do
+    Enrollment.delete(@enrollment)
     assert_difference('Enrollment.count') do
-      post enrollments_url, params: { enrollment: { course_id: @enrollment.course_id, user_id: @enrollment.user_id } }
+      post enrollments_url, params: { enrollment: { subject_id: @enrollment.subject_id, user_id: @enrollment.user_id } }
     end
 
     assert_redirected_to enrollment_url(Enrollment.last)
@@ -34,8 +39,8 @@ class EnrollmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update enrollment" do
-    patch enrollment_url(@enrollment), params: { enrollment: { course_id: @enrollment.course_id, user_id: @enrollment.user_id } }
-    assert_redirected_to enrollment_url(@enrollment)
+    patch enrollment_url(@enrollment), params: { enrollment: { subject_id: @enrollment.subject_id, user_id: @enrollment.user_id } }
+    assert_response :found
   end
 
   test "should destroy enrollment" do

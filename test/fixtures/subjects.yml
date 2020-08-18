@@ -2,10 +2,12 @@
 
 one:
   course: one
-  user: one
+  title: IoT
+  user: staff
   description: MyText
 
 two:
   course: two
-  user: two
+  title: Security
+  user: staff
   description: MyText

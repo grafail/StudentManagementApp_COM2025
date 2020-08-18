@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class AssessmentsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @assessment = assessments(:one)
+    set_up_users
+    sign_in @admin
   end
 
   test "should get index" do

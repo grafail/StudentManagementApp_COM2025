@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class CoursesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @course = courses(:one)
+    set_up_users
+    sign_in @admin
   end
 
   test "should get index" do
@@ -16,8 +20,9 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create course" do
+    Course.delete(@course)
     assert_difference('Course.count') do
-      post courses_url, params: { course: { title: @course.title, year: @course.year } }
+      post courses_url, params: { course: { courseType: @course.courseType, title: @course.title, year: @course.year } }
     end
 
     assert_redirected_to course_url(Course.last)
@@ -34,7 +39,7 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update course" do
-    patch course_url(@course), params: { course: { title: @course.title, year: @course.year } }
+    patch course_url(@course), params: { course: { courseType: @course.courseType, title: @course.title, year: @course.year } }
     assert_redirected_to course_url(@course)
   end
 

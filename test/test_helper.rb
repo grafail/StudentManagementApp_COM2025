@@ -7,4 +7,14 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def set_up_users
+    @admin = users(:admin)
+    @admin.grant :admin
+    @staff = users(:staff)
+    @staff.grant :staff
+    @student = users(:student)
+    @student.grant :student
+  end
+
 end

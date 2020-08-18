@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class SubjectsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @subject = subjects(:one)
+    set_up_users
+    sign_in @admin
   end
 
   test "should get index" do
@@ -16,8 +20,9 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create subject" do
+    Subject.delete(@subject)
     assert_difference('Subject.count') do
-      post subjects_url, params: { subject: { course_id: @subject.course_id, description: @subject.description, user_id: @subject.user_id } }
+      post subjects_url, params: { subject: { title:@subject.title, course_id: @subject.course_id, description: @subject.description, user_id: @subject.user_id } }
     end
 
     assert_redirected_to subject_url(Subject.last)
@@ -34,8 +39,8 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update subject" do
-    patch subject_url(@subject), params: { subject: { course_id: @subject.course_id, description: @subject.description, user_id: @subject.user_id } }
-    assert_redirected_to subject_url(@subject)
+    patch subject_url(@subject), params: { subject: { title:@subject.title, course_id: @subject.course_id, description: @subject.description, user_id: @subject.user_id } }
+    assert_response :found
   end
 
   test "should destroy subject" do

@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class GradesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @grade = grades(:one)
+    set_up_users
+    sign_in @admin
   end
 
   test "should get index" do
@@ -16,8 +20,9 @@ class GradesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create grade" do
+    Grade.delete(@grade)
     assert_difference('Grade.count') do
-      post grades_url, params: { grade: { assesment_id: @grade.assesment_id, grade: @grade.grade, user_id: @grade.user_id } }
+      post grades_url, params: { grade: { assessment_id: @grade.assessment_id, grade: @grade.grade, user_id: @grade.user_id } }
     end
 
     assert_redirected_to grade_url(Grade.last)
@@ -34,8 +39,8 @@ class GradesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update grade" do
-    patch grade_url(@grade), params: { grade: { assesment_id: @grade.assesment_id, grade: @grade.grade, user_id: @grade.user_id } }
-    assert_redirected_to grade_url(@grade)
+    patch grade_url(@grade), params: { grade: { assesment_id: @grade.assessment_id, grade: @grade.grade, user_id: @grade.user_id } }
+    assert_response :success
   end
 
   test "should destroy grade" do

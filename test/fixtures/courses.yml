@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  year: 1
+  courseType: BSc
+  title: Computer Science
+  year: 2020
 
 two:
-  title: MyString
-  year: 1
+  courseType: BSc
+  title: Economics
+  year: 2021
