@@ -15,9 +15,9 @@
         placeholder: "No Data Set",
         columns: [
             {title: "ID", field: "id", sorter: "number", editor: false},
-            {title: "Type", field: "courseType", sorter: "string", editor: true},
-            {title: "Title", field: "title", sorter: "string", editor: true},
-            {title: "Year", field: "year", sorter: "number", editor: true},
+            {title: "Type", field: "courseType", sorter: "string", editor: <%= @editStatus %>},
+            {title: "Title", field: "title", sorter: "string", editor: <%= @editStatus %>},
+            {title: "Year", field: "year", sorter: "number", editor: <%= @editStatus %>},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>

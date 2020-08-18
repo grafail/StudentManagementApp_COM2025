@@ -6,6 +6,11 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.all
+    if current_user.has_role? :admin
+      @editStatus = 'true'
+    else
+      @editStatus = 'false'
+    end
   end
 
   # GET /courses/1

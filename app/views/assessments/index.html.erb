@@ -12,9 +12,9 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "Subject ID", field: "subject_id", sorter: "number", editor: true},
+            {title: "Subject ID", field: "subject_id", sorter: "number", editor: <%= @editStatus %>},
             {title: "Subject Title", field: "subject_id",  formatter: subjectFormatter, sorter: "string", editor: false},
-            {title: "Assessment Name", field: "name", sorter: "string", editor: true},
+            {title: "Assessment Name", field: "name", sorter: "string", editor: <%= @editStatus %>},
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
         ],
         cellEdited: function (cell) {

@@ -12,10 +12,10 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "User ID", field: "id", sorter: "number",  editor: true},
-            {title: "First Name", field: "firstname", sorter: "string",  editor: true},
-            {title: "Last Name", field: "lastname", sorter: "string",  editor: true},
-            {title: "Email Address", field: "email", sorter: "string", editor: false},
+            {title: "User ID", field: "id", sorter: "number",  editor: false},
+            {title: "First Name", field: "firstname", sorter: "string",  editor: <%= @editStatus %>},
+            {title: "Last Name", field: "lastname", sorter: "string",  editor: <%= @editStatus %>},
+            {title: "Email Address", field: "email", sorter: "string", editor: <%= @editStatus %>},
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
         ],
         cellEdited: function (cell) {

@@ -6,10 +6,13 @@ class AssessmentsController < ApplicationController
   # GET /assessments.json
   def index
     if current_user.has_role? :admin
+      @editStatus = 'true'
       @assessments = Assessment.all
     elsif current_user.has_role? :student
+      @editStatus = 'false'
       @assessments = Assessment.with_student(current_user)
     elsif current_user.has_role? :staff
+      @editStatus = 'true'
       @assessments = Assessment.with_lecturer(current_user)
     end
   end

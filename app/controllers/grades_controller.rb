@@ -5,10 +5,12 @@ class GradesController < ApplicationController
   # GET /grades
   # GET /grades.json
   def index
+    @editStatus = 'true'
     if current_user.has_role? :admin
       @grades = Grade.all
     elsif current_user.has_role? :student
       @grades = Grade.with_student(current_user)
+      @editStatus = 'false'
     elsif current_user.has_role? :staff
       @grades = Grade.with_lecturer(current_user)
     end

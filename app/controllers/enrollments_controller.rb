@@ -5,8 +5,10 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments
   # GET /enrollments.json
   def index
+    @editStatus = 'false'
     if current_user.has_role? :admin
       @enrollments = Enrollment.all
+      @editStatus = 'true'
     elsif current_user.has_role? :student
       @enrollments = Enrollment.with_student(current_user)
     elsif current_user.has_role? :staff
