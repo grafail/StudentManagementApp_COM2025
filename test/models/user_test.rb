@@ -16,7 +16,6 @@ class UserTest < ActiveSupport::TestCase
     user.password = "123456"
     user.course_id = -1
     user.save
-    puts(User.all)
     refute user.valid?
   end
 
@@ -29,6 +28,16 @@ class UserTest < ActiveSupport::TestCase
     user.course_id = courses(:one).id
     user.save
     refute user.valid?
+  end
+
+  test 'should save valid user without course' do
+    user = User.new
+    user.firstname = "John"
+    user.lastname = "Doe"
+    user.email = "test6@example.org"
+    user.password = "123456"
+    user.save
+    assert user.valid?
   end
 
   test 'should save valid user' do

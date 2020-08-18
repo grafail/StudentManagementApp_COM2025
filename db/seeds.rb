@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
+Course.create!([
+                   { title: 'Computer Science', year: 2020, courseType: 'BSc' },
+                   { title: 'Aerospace Engineering', year: 2020, courseType: 'BSc' },
+                   { title: 'Economics', year: 2020, courseType: 'BSc' }
+               ])
+
 User.create!([
                { firstname: 'John', lastname: 'Doe', email: 'test@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil },
                { firstname: 'Jane', lastname: 'Doe', email: 'test2@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, course_id: 1 },
                { firstname: 'Joe', lastname: 'Bloggs', email: 'test3@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil}
              ])
-Course.create!([
-                 { title: 'Computer Science', year: 2020, courseType: 'BSc' },
-                 { title: 'Aerospace Engineering', year: 2020, courseType: 'BSc' },
-                 { title: 'Economics', year: 2020, courseType: 'BSc' }
-               ])
 
 Subject.create!([
                   { course_id: 1, user_id: 1, description: 'Advances related to energy efficiency issues and cost reductions have resulted in the rapid growth and deployment of networked devices and sensing/actuation systems that connect the physical word with the cyber-world. The number of devices connected to the Internet already exceeds the number of people on earth and is estimated to grow to 50 billion devices by 2020. The resulting framework, which is known as the Internet of Things (IoT), incorporates a number of technologies, including wireless sensor networks, pervasive systems, ambient intelligence, context-awareness and distributed systems. This module will provide an overview of the key concepts and enabling technologies for the Internet of Things, including: Wireless Sensor Networks, Platforms (Hardware, Software), Machine-to-Machine communications (M2M), protocols and standards (e.g. 6LowPAN, ZigBee, CoAp), semantic technologies, and data and information processing mechanisms.', title: 'Internet of Things' },

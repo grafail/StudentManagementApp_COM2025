@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates_presence_of :course, if: :course_id_present?
 
   def course_id_present?
-    course_id.present?
+    self.course_id.present?
   end
 
   def before_add_method(role)
