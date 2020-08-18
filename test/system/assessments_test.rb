@@ -11,7 +11,7 @@ class AssessmentsTest < ApplicationSystemTestCase
 
   test 'visiting the index' do
     visit assessments_url
-    assert_selector 'h1', text: 'Manage assessments'
+    assert_selector 'h1', text: 'Manage Assessments'
   end
 
   test 'creating a Assessment' do

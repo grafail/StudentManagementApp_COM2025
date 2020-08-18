@@ -11,7 +11,7 @@ class GradesTest < ApplicationSystemTestCase
 
   test 'visiting the index' do
     visit grades_url
-    assert_selector 'h1', text: 'Manage grades'
+    assert_selector 'h1', text: 'Manage Grades'
   end
 
   test 'creating a Grade' do

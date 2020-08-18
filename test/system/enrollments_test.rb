@@ -11,7 +11,7 @@ class EnrollmentsTest < ApplicationSystemTestCase
 
   test 'visiting the index' do
     visit enrollments_url
-    assert_selector 'h1', text: 'Manage enrollments'
+    assert_selector 'h1', text: 'Manage Enrollments'
   end
 
   test 'creating a Enrollment' do

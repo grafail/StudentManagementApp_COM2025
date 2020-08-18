@@ -26,8 +26,9 @@
             {title: "User Name", field: "user_id", formatter: userFormatter, sorter: "string", editor: false},
             {title: "User Email", field: "user_id", formatter: userFormatterEmail, sorter: "string", editor: false},
             {title: "Grade", field: "grade", sorter: "number", editor: <%= @editStatus %>},
+            <% if !current_user.has_role? :student %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
-        ],
+            <% end %>        ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
             console.log(cell.getRow().getData())
