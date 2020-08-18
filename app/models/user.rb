@@ -11,6 +11,11 @@ class User < ApplicationRecord
   has_many :grades, dependent: :destroy
 
   belongs_to :course, optional: true
+  validates_presence_of :course, if: :course_id_present?
+
+  def course_id_present?
+    course_id.present?
+  end
 
   def before_add_method(role)
     self.roles = []
