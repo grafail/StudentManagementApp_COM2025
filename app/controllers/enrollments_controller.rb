@@ -1,6 +1,6 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
-  before_action :checkNotStudent, only: [:edit, :update, :destroy]
+  before_action :checkIfAdmin, except: [:index, :show]
 
   # GET /enrollments
   # GET /enrollments.json
@@ -17,6 +17,12 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1
   # GET /enrollments/1.json
   def show
+    if (current_user.has_role? :student and current_user.id == @enrollment.user.id) or (current_user.has_role? :staff and
+        Enrollment.with_lecturer(current_user).includes(@enrollment)) or current_user.has_role? :admin
+      @enrollment
+    else
+      redirect_to root_path, notice: 'You do not have permission to view this page!'
+    end
   end
 
   # GET /enrollments/new

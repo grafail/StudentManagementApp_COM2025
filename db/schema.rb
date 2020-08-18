@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_175730) do
+ActiveRecord::Schema.define(version: 2020_08_18_100301) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "subject_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_08_15_175730) do
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "courseType"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -77,6 +78,8 @@ ActiveRecord::Schema.define(version: 2020_08_15_175730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
+    t.string "firstname"
+    t.string "lastname"
     t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

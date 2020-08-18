@@ -14,8 +14,8 @@
         columns: [
             {title: "Subject ID", field: "subject_id", sorter: "number", editor: true},
             {title: "Subject Title", field: "subject_id",  formatter: subjectFormatter, sorter: "string", editor: false},
-            {title: "Assessment Name", field: "name", sorter: "number", editor: true},
-            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+            {title: "Assessment Name", field: "name", sorter: "string", editor: true},
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
         ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.

@@ -8,10 +8,16 @@
       <div class="card text-center" style="width: 21.5em;margin:0 auto;">
         <div class="card-body">
           <p>
-            <strong>Email: </strong> <%= @user.email %>
+            <strong>User ID: </strong> <%= @user.id %>
           </p>
           <p>
-            <strong>User ID: </strong> <%= @user.id %>
+            <strong>First Name: </strong> <%= @user.firstname %>
+          </p>
+          <p>
+            <strong>Last Name: </strong> <%= @user.lastname %>
+          </p>
+          <p>
+            <strong>Email: </strong> <%= @user.email %>
           </p>
           <% if @user.course_id!=nil %>
             <% course = Course.find_by(id:@user.course_id) %>

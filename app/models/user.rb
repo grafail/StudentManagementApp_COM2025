@@ -5,6 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :firstname, :lastname, :email, presence: true
+
   has_many :enrollments, dependent: :destroy
   has_many :grades, dependent: :destroy
 
@@ -19,7 +21,7 @@ class User < ApplicationRecord
   scope :admins, -> { with_any_role('admin') }
 
   def to_s
-    email
+    firstname + ' ' + lastname
   end
 
 end

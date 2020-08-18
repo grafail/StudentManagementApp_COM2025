@@ -1,6 +1,6 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
-  before_action :checkNotStudent, only: [:edit, :update, :destroy]
+  before_action :checkNotStudent, except: [:index, :show]
 
   # GET /grades
   # GET /grades.json
@@ -17,7 +17,12 @@ class GradesController < ApplicationController
   # GET /grades/1
   # GET /grades/1.json
   def show
-    puts self
+    if (current_user.has_role? :student and current_user.id == @grade.user.id) or (current_user.has_role? :staff and
+        Grade.with_lecturer(current_user).includes(@grade)) or current_user.has_role? :admin
+      @grade
+    else
+      redirect_to root_path, notice: 'You do not have permission to view this page!'
+    end
   end
 
   # GET /grades/new
@@ -50,7 +55,7 @@ class GradesController < ApplicationController
   def update
     respond_to do |format|
       if @grade.update(grade_params)
-        format.html { redirect_to @grade, notice: 'Grade was successfully updated.' }
+        format.html { redirect_to @grade, notice: 'Grade was successfully updated.', status: :ok }
         format.json { render :show, status: :ok, location: @grade }
       else
         format.html { render :edit }
@@ -71,12 +76,12 @@ class GradesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_grade
-      @grade = Grade.find(params[:id])
-    end
+  def set_grade
+    @grade = Grade.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
-    def grade_params
-      params.require(:grade).permit(:assessment_id, :user_id, :grade)
-    end
+  def grade_params
+    params.require(:grade).permit(:assessment_id, :user_id, :grade)
+  end
 end

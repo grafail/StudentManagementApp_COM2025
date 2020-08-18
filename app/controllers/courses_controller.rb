@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :checkNotStudent, except: [:show]
 
   # GET /courses
   # GET /courses.json
@@ -70,7 +71,7 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:title, :year)
+    params.require(:course).permit(:title, :year, :courseType)
   end
 
 end

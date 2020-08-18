@@ -13,12 +13,12 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "User ID", field: "user_id", sorter: "string", editor: true},
-            {title: "User Email", field: "user_id",  formatter:userFormatter, sorter: "string", editor: false},
+            {title: "User ID", field: "user_id", sorter: "number", editor: true},
+            {title: "User Name", field: "user_id",  formatter:userFormatter, sorter: "string", editor: false},
             {title: "Subject ID", field: "subject_id", sorter: "number", editor: true},
-            {title: "Subject Name", field: "subject_id",  formatter:subjectFormatter, sorter: "number", editor: false},
+            {title: "Subject Name", field: "subject_id",  formatter:subjectFormatter, sorter: "string", editor: false},
             <% if current_user.has_role? :admin %>
-            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem}
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>
         ],
         cellEdited: function (cell) {

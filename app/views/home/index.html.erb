@@ -4,4 +4,6 @@
   <%= render 'layouts/shared/staffMenu' %>
 <% elsif current_user.has_role?(:student) %>
   <%= render 'layouts/shared/studentMenu' %>
+<% else %>
+  <%= render 'layouts/shared/noRoleMenu' %>
 <% end %>

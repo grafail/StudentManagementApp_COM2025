@@ -65,6 +65,22 @@ var userFormatter = function (cell) {
         dataType: 'json',
         async: false,
         success: function (data) {
+            responseData = data.firstname + ' ' + data.lastname;
+        },
+        error: function () {
+            responseData = 'Not Found!';
+        }
+    });
+    return responseData;
+}
+var userFormatterEmail = function (cell) {
+    data = cell.getRow().getData();
+    var responseData;
+    $.ajax({
+        url: '/admin/user/' + data.user_id,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
             responseData = data.email;
         },
         error: function () {
