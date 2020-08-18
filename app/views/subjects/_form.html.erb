@@ -13,21 +13,21 @@
 
   <div class="field">
     <%= form.label :course_id %>
-    <%= form.text_field :course_id %>
+    <%= form.text_field :course_id, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :user_id, "Lecturer" %>
-    <%= form.text_field :user_id %>
+    <%= form.text_field :user_id, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_area :title %>
+    <%= form.text_area :title, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, required: true %>
   </div>
 <% end %>

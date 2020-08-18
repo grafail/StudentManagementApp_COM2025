@@ -31,7 +31,6 @@
             <% end %>        ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
-            console.log(cell.getRow().getData())
             $.ajax({
 
                 url: '/grades/'+cell.getRow().getData().id,

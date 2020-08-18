@@ -13,16 +13,16 @@
 
   <div class="field">
     <%= form.label :assessment_id %>
-    <%= form.text_field :assessment_id %>
+    <%= form.text_field :assessment_id, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.text_field :user_id, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :grade %>
-    <%= form.text_field :grade %>
+    <%= form.number_field :grade, required: true, min: 0 %>
   </div>
 <% end %>

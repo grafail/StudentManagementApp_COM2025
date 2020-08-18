@@ -8,7 +8,6 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
 
   <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
   <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet">
@@ -23,6 +22,8 @@
   <% if content_for?(:head) %>
     <%= yield(:head) %>
   <% end %>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
 
 </head>
 
@@ -44,7 +45,7 @@
           <% end %>
         </div>
         <footer class="modal__footer">
-          <button class="modal__btn" data-micromodal-close onClick="submitForm();" aria-label="Cancel">Submit</button>
+          <button class="modal__btn"  onClick="submitButtonAction();" aria-label="Cancel">Submit</button>
           <button class="modal__btn" data-micromodal-close aria-label="Cancel">Close</button>
         </footer>
       </div>
@@ -69,4 +70,7 @@
   <%= render "layouts/shared/footer" %>
 <% end %>
 </body>
+<script>
+    v = $('#modal-1').find('form').validate();
+</script>
 </html>

@@ -30,7 +30,6 @@
         ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
-            console.log(cell.getRow().getData())
             $.ajax({
 
                 url: '/enrollments/'+cell.getRow().getData().id,

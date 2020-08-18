@@ -2,7 +2,16 @@ Rails.application.routes.draw do
   resources :assessments
   get 'admin/index'
   get 'admin/user/:id' => "admin#user", :as => "user_show"
-  devise_for :users
+  devise_for :users, controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
+  }
+
+  devise_scope :user do
+    patch 'users/:id', to: 'users/registrations#update_info'
+    delete 'users/:id', to: 'users/registrations#deleteUser', as: :admin_destroy_user
+  end
+
   resources :subjects
   resources :enrollments
   resources :grades

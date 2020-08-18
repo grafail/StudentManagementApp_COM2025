@@ -24,7 +24,6 @@
             //url - the URL of the request
             //params - the parameters passed with the request
             //response - the JSON object returned in the body of the response.
-            console.log(response);
             return response; //return the tableData property of a response json object
         },
         placeholder: "No Data Set",
@@ -43,7 +42,6 @@
             <% end %>        ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
-            console.log(cell.getRow().getData())
             $.ajax({
 
                 url: '/subjects/' + cell.getRow().getData().id,

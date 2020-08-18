@@ -3,7 +3,7 @@
 <div id="table"></div>
 
 <% content_for :modal do %>
-  <%# render 'form', user:Users.new %>
+  <% render 'form', resource:User.new %>
 <% end %>
 
 <script>
@@ -15,18 +15,17 @@
             {title: "User ID", field: "id", sorter: "number",  editor: false},
             {title: "First Name", field: "firstname", sorter: "string",  editor: <%= @editStatus %>},
             {title: "Last Name", field: "lastname", sorter: "string",  editor: <%= @editStatus %>},
-            {title: "Email Address", field: "email", sorter: "string", editor: <%= @editStatus %>},
-            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
+            {title: "Email Address", field: "email", sorter: "string", validator:"regex:[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", editor: <%= @editStatus %>},
+            {formatter:"buttonCross", width:40, align:"center", cellClick:deleteUser, cssClass: "DELETE_BUTTON_CLASS"}
         ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
-            console.log(cell.getRow().getData())
             $.ajax({
 
-                url: '/admin/users/'+cell.getRow().getData().id,
+                url: '/users/'+cell.getRow().getData().id,
                 method: 'PATCH',
                 dataType: 'json',
-                data: {assessment: cell.getRow().getData()},
+                data: {user: cell.getRow().getData()},
                 success: function () {
                     toastr.success('Edit was successful!')
                     table.replaceData()

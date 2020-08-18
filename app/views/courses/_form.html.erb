@@ -13,16 +13,16 @@
 
   <div class="field">
     <%= form.label :courseType, "Course Type" %>
-    <%= form.text_field :courseType %>
+    <%= form.text_field :courseType, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :year %>
-    <%= form.number_field :year %>
+    <%= form.number_field :year, required: true %>
   </div>
 <% end %>
