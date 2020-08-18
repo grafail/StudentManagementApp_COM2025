@@ -11,7 +11,7 @@ class SubjectsTest < ApplicationSystemTestCase
 
   test 'visiting the index' do
     visit subjects_url
-    assert_selector 'h1', text: 'Manage All Subjects'
+    assert_selector 'h1', text: 'Manage Subjects'
   end
 
   test 'creating a Subject' do

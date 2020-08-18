@@ -1,5 +1,13 @@
 <hr style="clear:both;visibility:hidden;">
-<h1 style="text-align: center;">Manage grades</h1>
+<h1 style="text-align: center;">
+  <% if current_user.has_role? :student %>
+    My Grades
+  <% elsif current_user.has_role? :staff %>
+    Manage Grades For My Subjects
+  <% else %>
+    Manage Grades
+  <% end %>
+</h1>
 <div id="table"></div>
 
 <% content_for :modal do %>

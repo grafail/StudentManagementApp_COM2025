@@ -1,5 +1,12 @@
 <hr style="clear:both;visibility:hidden;">
-<h1 style="text-align: center;"> Manage enrollments</h1>
+<h1 style="text-align: center;">
+  <% if current_user.has_role? :admin %>
+    Manage Enrollments
+  <% elsif current_user.has_role? :student %>
+    My Enrollments
+  <% else %>
+    Review Enrollments For My courses
+  <% end %></h1>
 <div id="table"></div>
 
 <% content_for :modal do %>

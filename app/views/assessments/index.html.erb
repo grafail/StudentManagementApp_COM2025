@@ -1,5 +1,13 @@
 <hr style="clear:both;visibility:hidden;">
-<h1 style="text-align: center;">Manage assessments</h1>
+<h1 style="text-align: center;">
+  <% if current_user.has_role? :student %>
+    My Assessments
+  <% elsif current_user.has_role? :staff %>
+    Manage Assessments For My Subjects
+  <% else %>
+    Manage Assessments
+  <% end %>
+</h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
