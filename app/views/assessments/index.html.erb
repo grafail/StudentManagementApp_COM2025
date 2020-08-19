@@ -1,11 +1,11 @@
 <hr style="clear:both;visibility:hidden;">
 <h1 style="text-align: center;">
   <% if current_user.has_role? :student %>
-    My Assessments
+    <%= t('assessments.my_assessments') %>
   <% elsif current_user.has_role? :staff %>
-    Manage Assessments For My Subjects
+    <%= t('assessments.manage_assessments_for_my_subjects') %>
   <% else %>
-    Manage Assessments
+    <%= t('assessments.manage_assessments') %>
   <% end %>
 </h1>
 <div id="table"></div>
@@ -20,9 +20,9 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "Subject ID", field: "subject_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "Subject Title", field: "subject_id",  formatter: subjectFormatter, sorter: "string", editor: false},
-            {title: "Assessment Name", field: "name", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('subject_id') %>", field: "subject_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('subject_title') %>", field: "subject_id",  formatter: subjectFormatter, sorter: "string", editor: false},
+            {title: "<%= t('assessment_name') %>", field: "name", sorter: "string", editor: <%= @editStatus %>},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>        ],
@@ -35,11 +35,11 @@
                 dataType: 'json',
                 data: {assessment: cell.getRow().getData()},
                 success: function () {
-                    toastr.success('Edit was successful!')
+                    toastr.success('<%= t('edit_success') %>')
                     table.replaceData()
                 },
                 error: function () {
-                    toastr.error('Incorrect input or insufficient access!')
+                    toastr.error('<%= t('edit_fail') %>')
                     table.replaceData()
                 }
 
@@ -53,6 +53,6 @@
 
 </script>
 <% if !current_user.has_role? :student %>
-  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Assessment</button>
+  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')"><%= t('assesments.new_assessment') %></button>
 <% end %>
-<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>
+<button class="btn btn-primary" onclick="table.replaceData()"><%= t('subject_title') %></button>

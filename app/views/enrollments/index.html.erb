@@ -1,11 +1,11 @@
 <hr style="clear:both;visibility:hidden;">
 <h1 style="text-align: center;">
   <% if current_user.has_role? :admin %>
-    Manage Enrollments
+    <%= t('enrollments.manage_enrollments') %>
   <% elsif current_user.has_role? :student %>
-    My Enrollments
+    <%= t('enrollments.my_enrollments') %>
   <% else %>
-    Review Enrollments For My courses
+    <%= t('enrollments.review_enrollments_for_my_courses') %>
   <% end %></h1>
 <div id="table"></div>
 
@@ -20,10 +20,10 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "User ID", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "User Name", field: "user_id",  formatter:userFormatter, sorter: "string", editor: false},
-            {title: "Subject ID", field: "subject_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "Subject Name", field: "subject_id",  formatter:subjectFormatter, sorter: "string", editor: false},
+            {title: "<%= t('user_id') %>", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('user_name') %>", field: "user_id",  formatter:userFormatter, sorter: "string", editor: false},
+            {title: "<%= t('subject_id') %>", field: "subject_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('subject_name') %>", field: "subject_id",  formatter:subjectFormatter, sorter: "string", editor: false},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>
@@ -37,11 +37,11 @@
                 dataType: 'json',
                 data: {enrollment: cell.getRow().getData()},
                 success: function () {
-                    toastr.success('Edit was successful!')
+                    toastr.success('<%= t('edit_success') %>')
                     table.replaceData()
                 },
                 error: function () {
-                    toastr.error('Incorrect input or insufficient access!')
+                    toastr.error('<%= t('edit_fail') %>')
                     table.replaceData()
                 }
 
@@ -54,5 +54,5 @@
     });
 
 </script>
-<button class="btn btn-primary" onclick="MicroModal.show('modal-1')">New Enrollment</button>
-<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>
+<button class="btn btn-primary" onclick="MicroModal.show('modal-1')"><%= t('enrollments.new_enrollment') %></button>
+<button class="btn btn-primary" onclick="table.replaceData()"><%= t('subject_title') %></button>

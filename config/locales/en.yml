@@ -48,6 +48,57 @@ en:
     signed_in_as: "Signed in as:"
   footer:
     copyright: "© StudentApp 2020. All Rights Reserved."
+  no_permission: "You do not have permission to view this page!"
+  user_id: "User ID"
+  firstname: "First Name"
+  lastname: "Last Name"
+  email_address: "Email Address"
+  role: "Role"
+  edit_success: "Edit was successful!"
+  edit_fail: "Incorrect input or insufficient access!"
+  users:
+    manage_users: "Manage users"
+  assessments:
+    my_assessments: "My Assessments"
+    manage_assessments_for_my_subjects: "Manage Assessments For My Subjects"
+    manage_assessments: "Manage Assessments"
+  courses:
+    manage_courses: "Manage Courses"
+    new_course: "New Course"
+  enrollments:
+    manage_enrollments: "Manage Enrollments"
+    my_enrollments: "My Enrollments"
+    review_enrollments_for_my_courses: "Review Enrollments For My courses"
+    new_enrollment: "New Enrollment"
+  grades:
+    my_grades: "My Grades"
+    manage_grades_for_my_subjects: "Manage Grades For My Subjects"
+    manage_grades: "Manage Grades"
+    new_grade: "New Grade"
+  subjects:
+    manage_my_subjects: "Manage My Subjects"
+    enroll_to_new_subject: "Enroll to new subject"
+    manage_subjects: "Manage Subjects"
+    new_subject: "New Subject"
+  subject_id: "Subject ID"
+  subject_title: "Subject Title"
+  assessment_name: "Assessment Name"
+  assesments:
+    new_assessment: "New Assessment"
+  refresh_data: "Refresh Data"
+  id: "ID"
+  type: "Type"
+  title: "Title"
+  year: "Year"
+  subject_name: "Subject Name"
+  assessment_id: "Assessment ID"
+  assessment_title: "Assessment Title"
+  grade: "Grade"
+  course_id: "Course ID"
+  course_name: "Course Name"
+  lecturer_id: "Lecturer ID"
+  lecturer_name: "Lecturer Name"
+  description: "Description"
 
 
 

@@ -1,11 +1,11 @@
 <p>Dear <%= t('app_name') %></p>
 <p>Could you get in touch with me please?</p>
 <dl>
-  <dt>First Name:</dt>
+  <dt><%= I18n.t('firstname') %>:</dt>
   <dd><%= @fname %></dd>
-  <dt>Last Name:</dt>
+  <dt><%= I18n.t('lastname') %>:</dt>
   <dd><%= @lname %></dd>
-  <dt>Email:</dt>
+  <dt><%= I18n.t('email_address') %>:</dt>
   <dd><%= @email %></dd>
   <p>Message:</p>
   <p><%= @message %></p>

@@ -1,5 +1,5 @@
 <hr style="clear:both;visibility:hidden;">
-<h1 style="text-align: center;">Manage users</h1>
+<h1 style="text-align: center;"><%= t('users.manage_users') %></h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
@@ -12,11 +12,11 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "User ID", field: "id", sorter: "number",  editor: false},
-            {title: "First Name", field: "firstname", sorter: "string",  editor: <%= @editStatus %>},
-            {title: "Last Name", field: "lastname", sorter: "string",  editor: <%= @editStatus %>},
-            {title: "Email Address", field: "email", sorter: "string", validator:"regex:[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", editor: <%= @editStatus %>},
-            {title: "Role", field: "roles", mutatorData: roleMutator, formatter: roleFormatter, sorter: "string", editor: "select",
+            {title: "<%= I18n.t('user_id') %>", field:"id", sorter: "number",  editor: false},
+            {title: "<%= I18n.t('firstname') %>", field: "firstname", sorter: "string",  editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('lastname') %>", field: "lastname", sorter: "string",  editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('email_address') %>", field: "email", sorter: "string", validator:"regex:[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('role') %>", field: "roles", mutatorData: roleMutator, formatter: roleFormatter, sorter: "string", editor: "select",
                 editorParams: {
                 values:[
             {
@@ -44,11 +44,11 @@
                 dataType: 'json',
                 data: {user: cell.getRow().getData()},
                 success: function () {
-                    toastr.success('Edit was successful!')
+                    toastr.success('<%= t('edit_success') %>')
                     table.replaceData()
                 },
                 error: function () {
-                    toastr.error('Incorrect input or insufficient access!')
+                    toastr.error('<%= t('edit_fail') %>')
                     table.replaceData()
                 }
 
@@ -62,4 +62,4 @@
 
 </script>
 <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New User</button>
-<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>
+<button class="btn btn-primary" onclick="table.replaceData()"><%= t('subject_title') %></button>

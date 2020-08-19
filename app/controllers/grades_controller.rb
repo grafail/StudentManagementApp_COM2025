@@ -26,7 +26,7 @@ class GradesController < ApplicationController
         format.json { render :show, status: :ok, location: @grade }
       end
     else
-      redirect_to root_path, notice: 'You do not have permission to view this page!'
+      redirect_to root_path, notice: I18n.t('no_permission')
     end
   end
 

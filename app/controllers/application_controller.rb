@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, :with => :error_render_method
 
   def checkIfAdmin
-    redirect_to root_path, notice: 'You do not have permission to view this page!' unless !current_user.nil? and current_user.has_role? :admin
+    redirect_to root_path, notice: I18n.t('no_permission') unless !current_user.nil? and current_user.has_role? :admin
   end
 
   def checkNotStudent
-    redirect_to root_path, notice: 'You do not have permission to view this page!' if current_user.has_role? :student
+    redirect_to root_path, notice: I18n.t('no_permission') if current_user.has_role? :student
   end
 
   def error_render_method

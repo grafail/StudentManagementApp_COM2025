@@ -1,11 +1,11 @@
 <hr style="clear:both;visibility:hidden;">
 <h1 style="text-align: center;">
   <% if current_user.has_role? :staff %>
-    Manage My Subjects
+    <%= t('subjects.manage_my_subjects') %>
   <% elsif current_user.has_role? :student %>
-    Enroll to new subject
+    <%= t('subjects.enroll_to_new_subject') %>
   <% else %>
-    Manage Subjects
+    <%= t('subjects.manage_subjects') %>
   <% end %>
 </h1>
 <div id="table"></div>
@@ -28,13 +28,13 @@
         },
         placeholder: "No Data Set",
         columns: [
-            {title: "Subject ID", field: "id", sorter: "string", editor: <%= @editStatus %>},
-            {title: "Course ID", field: "course_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "Course Name", field: "course_id", formatter: courseFormatter, sorter: "string", width: 200, editor: false},
-            {title: "Lecturer ID", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "Lecturer Name", field: "user_id", formatter: userFormatter, sorter: "string", width: 200, editor: false},
-            {title: "Title", field: "title", sorter: "string", editor: <%= @editStatus %>},
-            {title: "Description", formatter:"textarea", field: "description", sorter: "string", editor: false},
+            {title: "<%= t('subject_id') %>", field: "id", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('course_id') %>", field: "course_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('course_name') %>", field: "course_id", formatter: courseFormatter, sorter: "string", width: 200, editor: false},
+            {title: "<%= t('lecturer_id') %>", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('lecturer_name') %> %>", field: "user_id", formatter: userFormatter, sorter: "string", width: 200, editor: false},
+            {title: "<%= t('title') %>", field: "title", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('description') %>", formatter:"textarea", field: "description", sorter: "string", editor: false},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"},
             <% elsif  current_user.has_role? :student%>
@@ -49,11 +49,11 @@
                 dataType: 'json',
                 data: {subject: cell.getRow().getData()},
                 success: function () {
-                    toastr.success('Edit was successful!')
+                    toastr.success('<%= t('edit_success') %>')
                     table.replaceData()
                 },
                 error: function () {
-                    toastr.error('Incorrect input or insufficient access!')
+                    toastr.error('<%= t('edit_fail') %>')
                     table.replaceData()
                 }
 
@@ -67,6 +67,6 @@
 
 </script>
 <% if current_user.has_role? :admin %>
-  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Subject</button>
+  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')"><%= t('subjects.new_subject') %></button>
 <% end %>
-<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>
+<button class="btn btn-primary" onclick="table.replaceData()"><%= t('refresh_data') %></button>

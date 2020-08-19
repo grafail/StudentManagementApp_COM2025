@@ -1,11 +1,11 @@
 <hr style="clear:both;visibility:hidden;">
 <h1 style="text-align: center;">
   <% if current_user.has_role? :student %>
-    My Grades
+    <%= t('grades.my_grades') %>
   <% elsif current_user.has_role? :staff %>
-    Manage Grades For My Subjects
+    <%= t('grades.manage_grades_for_my_subjects') %>
   <% else %>
-    Manage Grades
+    <%= t('grades.manage_grades') %>
   <% end %>
 </h1>
 <div id="table"></div>
@@ -20,12 +20,12 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "Assessment ID", field: "assessment_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "Assessment Title", field: "assessment_id", formatter: assessmentFormatter,sorter: "string", editor: false},
-            {title: "User ID", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "User Name", field: "user_id", formatter: userFormatter, sorter: "string", editor: false},
-            {title: "User Email", field: "user_id", formatter: userFormatterEmail, sorter: "string", editor: false},
-            {title: "Grade", field: "grade", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('assessment_id') %>", field: "assessment_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('assessment_title') %>", field: "assessment_id", formatter: assessmentFormatter,sorter: "string", editor: false},
+            {title: "<%= t('user_id') %>", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('user_name') %>", field: "user_id", formatter: userFormatter, sorter: "string", editor: false},
+            {title: "<%= I18n.t('email_address') %>", field: "user_id", formatter: userFormatterEmail, sorter: "string", editor: false},
+            {title: "<%= t('grade') %>", field: "grade", sorter: "number", editor: <%= @editStatus %>},
             <% if !current_user.has_role? :student %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>        ],
@@ -38,11 +38,11 @@
                 dataType: 'json',
                 data: {grade: cell.getRow().getData()},
                 success: function () {
-                    toastr.success('Edit was successful!')
+                    toastr.success('<%= t('edit_success') %>')
                     table.replaceData()
                 },
                 error: function () {
-                    toastr.error('Incorrect input or insufficient access!')
+                    toastr.error('<%= t('edit_fail') %>')
                     table.replaceData()
                 }
 
@@ -56,6 +56,6 @@
 
 </script>
 <% if !current_user.has_role? :student %>
-  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Grade</button>
+  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')"><%= t('grades.new_grade') %></button>
 <% end %>
-<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>
+<button class="btn btn-primary" onclick="table.replaceData()"><%= t('subject_title') %></button>

@@ -1,5 +1,5 @@
 <hr style="clear:both;visibility:hidden;">
-<h1 style="text-align: center;">Manage Courses</h1>
+<h1 style="text-align: center;"><%= t('courses.manage_courses') %></h1>
 <div id="table"></div>
 
 <% content_for :modal do %>
@@ -14,10 +14,10 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "ID", field: "id", sorter: "number", editor: false},
-            {title: "Type", field: "courseType", sorter: "string", editor: <%= @editStatus %>},
-            {title: "Title", field: "title", sorter: "string", editor: <%= @editStatus %>},
-            {title: "Year", field: "year", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('id') %>", field: "id", sorter: "number", editor: false},
+            {title: "<%= t('type') %>", field: "courseType", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('title') %>", field: "title", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('year') %>", field: "year", sorter: "number", editor: <%= @editStatus %>},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>
@@ -30,10 +30,10 @@
                 dataType: 'json',
                 data: {course: cell.getRow().getData()},
                 success: function () {
-                    toastr.success('Edit was successful!')
+                    toastr.success('<%= t('edit_success') %>')
                 },
                 error: function () {
-                    toastr.error('Incorrect input or insufficient access!')
+                    toastr.error('<%= t('edit_fail') %>')
                     table.replaceData()
                 }
 
@@ -47,6 +47,6 @@
 
 </script>
 <% if current_user.has_role? :admin %>
-  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Course</button>
+  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')"><%= t('courses.new_course') %></button>
 <% end %>
-<button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>
+<button class="btn btn-primary" onclick="table.replaceData()"><%= t('subject_title') %></button>
