@@ -3,31 +3,31 @@
     <div class="col">
       <a href="<%= grades_path %>" class="btn btn-sq-lg btn-primary">
         <i class="fas fa-graduation-cap fa-5x"></i><br/>
-        My Grades <br>
+        <%= t('menu.my_grades') %> <br>
       </a>
     </div>
     <div class="col">
       <a href="<%= subjects_path %>" class="btn btn-sq-lg btn-info">
         <i class="fas fa-book fa-5x"></i><br/>
-        Enroll to new Subject <br>
+        <%= t('menu.enroll_to_new_subject') %> <br>
       </a>
     </div>
     <div class="col">
       <a href="<%= user_show_path(current_user) %>" class="btn btn-sq-lg btn-warning">
         <i class="fas fa-user-cog fa-5x"></i><br/>
-        My Account Info <br>
+        <%= t('menu.my_account_info') %> <br>
       </a>
     </div>
     <div class="col">
       <a href="<%= enrollments_path %>" class="btn btn-sq-lg btn-danger">
         <i class="fas fa-plus fa-5x"></i><br/>
-        My Enrollments<br>
+        <%= t('menu.my_enrollments') %><br>
       </a>
     </div>
     <div class="col">
       <a href="<%= assessments_path %>" class="btn btn-sq-lg btn-secondary">
         <i class="fas fa-microscope fa-5x"></i><br/>
-        Manage Assessments<br>
+        <%= t('menu.manage_assessments') %><br>
       </a>
     </div>
   </div>

@@ -99,6 +99,22 @@ en:
   lecturer_id: "Lecturer ID"
   lecturer_name: "Lecturer Name"
   description: "Description"
+  menu:
+    no_role_menu_message: "No role has been assigned to this account. Please contact an administrator."
+    manage_grades_for_my_subjects: "Manage Grades For My Subjects"
+    manage_my_subjects: "Manage My Subjects"
+    manage_assessments_for_my_subjects: "Manage Assessments For My Subjects"
+    review_enrollments_for_my_courses: "Review Enrollments For My courses"
+    my_grades: "My Grades"
+    enroll_to_new_subject: "Enroll to new Subject"
+    my_account_info: "My Account Info"
+    my_enrollments: "My Enrollments"
+    manage_assessments: "Manage Assessments"
+    manage_grades: "Manage Grades"
+    manage_courses: "Manage Courses"
+    manage_subjects: "Manage Subjects"
+    manage_users: "Manage Users"
+    manage_enrollments: "Manage Enrollments"
 
 
 
