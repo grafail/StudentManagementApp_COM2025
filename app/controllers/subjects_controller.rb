@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
-  #before_action :checkIfAdmin, except: [:index, :show]
+  before_action :checkIfAdmin, except: [:index, :show]
 
   # GET /subjects
   # GET /subjects.json
@@ -19,15 +19,10 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
-  end
-
-  # GET /subjects/new
-  def new
-    @subject = Subject.new
-  end
-
-  # GET /subjects/1/edit
-  def edit
+    respond_to do |format|
+      format.html { redirect_to subjects_url}
+      format.json { render :show, status: :ok, location: @subject }
+    end
   end
 
   # POST /subjects
@@ -37,10 +32,10 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.save
-        format.html { redirect_to @subject, notice: 'Subject was successfully created.' }
+        format.html { redirect_to subjects_url, notice: 'Subject was successfully created.' }
         format.json { render :show, status: :created, location: @subject }
       else
-        format.html { render :new }
+        format.html { redirect_to subjects_url }
         format.json { render json: @subject.errors, status: :unprocessable_entity }
       end
     end
@@ -51,10 +46,10 @@ class SubjectsController < ApplicationController
   def update
     respond_to do |format|
       if (current_user.has_role?(:admin) or current_user.has_role?(:staff)) and @subject.update(subject_params)
-        format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
+        format.html { redirect_to subjects_url, notice: 'Subject was successfully updated.' }
         format.json { render :show, status: :ok, location: @subject }
       else
-        format.html { render :edit, notice: 'Subject was not successfully updated.' }
+        format.html { redirect_to subjects_url, notice: 'Subject was not successfully updated.' }
         format.json { render json: @subject.errors, status: :unprocessable_entity }
       end
     end

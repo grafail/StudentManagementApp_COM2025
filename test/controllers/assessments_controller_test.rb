@@ -14,32 +14,22 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_assessment_url
-    assert_response :success
-  end
-
   test "should create assessment" do
     assert_difference('Assessment.count') do
       post assessments_url, params: { assessment: { name: @assessment.name, subject_id: @assessment.subject_id } }
     end
 
-    assert_redirected_to assessment_url(Assessment.last)
+    assert_redirected_to assessments_url
   end
 
   test "should show assessment" do
     get assessment_url(@assessment)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_assessment_url(@assessment)
-    assert_response :success
+    assert_redirected_to assessments_url
   end
 
   test "should update assessment" do
     patch assessment_url(@assessment), params: { assessment: { name: @assessment.name, subject_id: @assessment.subject_id } }
-    assert_redirected_to assessment_url(@assessment)
+    assert_redirected_to assessments_url
   end
 
   test "should destroy assessment" do

@@ -21,19 +21,13 @@ class GradesController < ApplicationController
   def show
     if (current_user.has_role? :student and current_user.id == @grade.user.id) or (current_user.has_role? :staff and
         Grade.with_lecturer(current_user).includes(@grade)) or current_user.has_role? :admin
-      @grade
+      respond_to do |format|
+        format.html { redirect_to grades_url}
+        format.json { render :show, status: :ok, location: @grade }
+      end
     else
       redirect_to root_path, notice: 'You do not have permission to view this page!'
     end
-  end
-
-  # GET /grades/new
-  def new
-    @grade = Grade.new
-  end
-
-  # GET /grades/1/edit
-  def edit
   end
 
   # POST /grades
@@ -43,10 +37,10 @@ class GradesController < ApplicationController
 
     respond_to do |format|
       if @grade.save
-        format.html { redirect_to @grade, notice: 'Grade was successfully created.' }
+        format.html { redirect_to grades_url, notice: 'Grade was successfully created.' }
         format.json { render :show, status: :created, location: @grade }
       else
-        format.html { render :new }
+        format.html { redirect_to grades_url }
         format.json { render json: @grade.errors, status: :unprocessable_entity }
       end
     end
@@ -57,10 +51,10 @@ class GradesController < ApplicationController
   def update
     respond_to do |format|
       if @grade.update(grade_params)
-        format.html { redirect_to @grade, notice: 'Grade was successfully updated.', status: :ok }
+        format.html { redirect_to grades_url, notice: 'Grade was successfully updated.', status: :ok }
         format.json { render :show, status: :ok, location: @grade }
       else
-        format.html { render :edit }
+        format.html { redirect_to grades_url }
         format.json { render json: @grade.errors, status: :unprocessable_entity }
       end
     end

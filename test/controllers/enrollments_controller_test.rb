@@ -14,28 +14,18 @@ class EnrollmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_enrollment_url
-    assert_response :success
-  end
-
   test "should create enrollment" do
     Enrollment.delete(@enrollment)
     assert_difference('Enrollment.count') do
       post enrollments_url, params: { enrollment: { subject_id: @enrollment.subject_id, user_id: @enrollment.user_id } }
     end
 
-    assert_redirected_to enrollment_url(Enrollment.last)
+    assert_redirected_to enrollments_url
   end
 
   test "should show enrollment" do
     get enrollment_url(@enrollment)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_enrollment_url(@enrollment)
-    assert_response :success
+    assert_redirected_to enrollments_url
   end
 
   test "should update enrollment" do

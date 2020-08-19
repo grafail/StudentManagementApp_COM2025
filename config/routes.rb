@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :assessments
   get 'admin/index'
   get 'admin/user/:id' => "admin#user", :as => "user_show"
   get 'admin/user/role/:id' => "admin#role", :as => "user_role"
@@ -13,10 +12,11 @@ Rails.application.routes.draw do
     delete 'users/:id', to: 'users/registrations#deleteUser', as: :admin_destroy_user
   end
 
-  resources :subjects
-  resources :enrollments
-  resources :grades
-  resources :courses
+  resources :assessments, except:[:edit, :new]
+  resources :subjects, except:[:edit, :new]
+  resources :enrollments, except:[:edit, :new]
+  resources :grades, except:[:edit, :new]
+  resources :courses, except:[:edit, :new]
   root 'home#index'
   get 'contact' => 'home#contact'
   post 'contact' => 'home#request_contact'

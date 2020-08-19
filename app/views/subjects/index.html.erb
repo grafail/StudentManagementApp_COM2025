@@ -66,5 +66,7 @@
     });
 
 </script>
-<button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Subject</button>
+<% if current_user.has_role? :admin %>
+  <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')">New Subject</button>
+<% end %>
 <button class="btn btn-primary" onclick="table.replaceData()">Refresh Data</button>

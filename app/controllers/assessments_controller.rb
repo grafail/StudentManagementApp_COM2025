@@ -20,22 +20,18 @@ class AssessmentsController < ApplicationController
   # GET /assessments/1
   # GET /assessments/1.json
   def show
-    if current_user.has_role? :admin
-      @assessment
-    elsif current_user.has_role? :student
-      @assessment if Assessment.with_student(current_user).include?(@assessment)
-    elsif current_user.has_role? :staff
-      @assessment if Assessment.with_lecturer(current_user).include?(@assessment)
+    respond_to do |format|
+        format.html { redirect_to assessments_url}
+        format.json {
+          if current_user.has_role? :admin
+            render :show, status: :ok, location: @assessment
+          elsif current_user.has_role? :student
+            render :show, status: :ok, location: @assessment if Assessment.with_student(current_user).include?(@assessment)
+          elsif current_user.has_role? :staff
+            render :show, status: :ok, location: @assessment if Assessment.with_lecturer(current_user).include?(@assessment)
+          end
+        }
     end
-  end
-
-  # GET /assessments/new
-  def new
-    @assessment = Assessment.new
-  end
-
-  # GET /assessments/1/edit
-  def edit
   end
 
   # POST /assessments
@@ -45,10 +41,10 @@ class AssessmentsController < ApplicationController
 
     respond_to do |format|
       if @assessment.save
-        format.html { redirect_to @assessment, notice: 'Assessment was successfully created.' }
+        format.html { redirect_to assessments_url, notice: 'Assessment was successfully created.' }
         format.json { render :show, status: :created, location: @assessment }
       else
-        format.html { render :new }
+        format.html { redirect_to assessments_url }
         format.json { render json: @assessment.errors, status: :unprocessable_entity }
       end
     end
@@ -59,10 +55,10 @@ class AssessmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assessment.update(assessment_params)
-        format.html { redirect_to @assessment, notice: 'Assessment was successfully updated.' }
+        format.html { redirect_to assessments_url, notice: 'Assessment was successfully updated.' }
         format.json { render :show, status: :ok, location: @assessment }
       else
-        format.html { render :edit }
+        format.html { redirect_to assessments_url }
         format.json { render json: @assessment.errors, status: :unprocessable_entity }
       end
     end
@@ -80,12 +76,12 @@ class AssessmentsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_assessment
-      @assessment = Assessment.find(params[:id])
-    end
+  def set_assessment
+    @assessment = Assessment.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
-    def assessment_params
-      params.require(:assessment).permit(:subject_id, :name)
-    end
+  def assessment_params
+    params.require(:assessment).permit(:subject_id, :name)
+  end
 end

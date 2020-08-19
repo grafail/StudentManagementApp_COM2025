@@ -14,33 +14,23 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_course_url
-    assert_response :success
-  end
-
   test "should create course" do
     Course.delete(@course)
     assert_difference('Course.count') do
       post courses_url, params: { course: { courseType: @course.courseType, title: @course.title, year: @course.year } }
     end
 
-    assert_redirected_to course_url(Course.last)
+    assert_redirected_to courses_url
   end
 
   test "should show course" do
     get course_url(@course)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_course_url(@course)
-    assert_response :success
+    assert_redirected_to courses_url
   end
 
   test "should update course" do
     patch course_url(@course), params: { course: { courseType: @course.courseType, title: @course.title, year: @course.year } }
-    assert_redirected_to course_url(@course)
+    assert_redirected_to courses_url
   end
 
   test "should destroy course" do

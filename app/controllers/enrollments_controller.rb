@@ -21,22 +21,12 @@ class EnrollmentsController < ApplicationController
   def show
     if (current_user.has_role? :student and current_user.id == @enrollment.user.id) or (current_user.has_role? :staff and
         Enrollment.with_lecturer(current_user).includes(@enrollment)) or current_user.has_role? :admin
-      @enrollment
+      respond_to do |format|
+        format.html { redirect_to enrollments_url}
+        format.json { render :show, status: :ok, location: @enrollment }
+      end
     else
       redirect_to root_path, notice: 'You do not have permission to view this page!'
-    end
-  end
-
-  # GET /enrollments/new
-  def new
-    @enrollment = Enrollment.new
-  end
-
-  # GET /enrollments/1/edit
-  def edit
-    respond_to do |format|
-      format.html
-      format.js
     end
   end
 
@@ -51,10 +41,10 @@ class EnrollmentsController < ApplicationController
 
     respond_to do |format|
       if @enrollment.save
-        format.html { redirect_to @enrollment, notice: 'Enrollment was successfully created.' }
+        format.html { redirect_to enrollments_url, notice: 'Enrollment was successfully created.' }
         format.json { render :show, status: :created, location: @enrollment }
       else
-        format.html { render :new }
+        format.html { redirect_to enrollments_url }
         format.json { render json: @enrollment.errors, status: :unprocessable_entity }
       end
     end
@@ -65,10 +55,10 @@ class EnrollmentsController < ApplicationController
   def update
     respond_to do |format|
       if @enrollment.update(enrollment_params)
-        format.html { redirect_to @enrollment, notice: 'Enrollment was successfully updated.' }
+        format.html { redirect_to enrollments_url, notice: 'Enrollment was successfully updated.' }
         format.json { render :show, status: :ok, location: @enrollment }
       else
-        format.html { render :edit }
+        format.html { redirect_to enrollments_url }
         format.json { render json: @enrollment.errors, status: :unprocessable_entity }
       end
     end
