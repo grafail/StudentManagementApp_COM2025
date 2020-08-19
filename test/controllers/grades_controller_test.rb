@@ -23,6 +23,14 @@ class GradesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to grades_url
   end
 
+  test "should not create grade without permission" do
+    sign_in @student
+    Grade.delete(@grade)
+    assert_no_difference('Grade.count') do
+      post grades_url, params: { grade: { assessment_id: @grade.assessment_id, grade: @grade.grade, user_id: @grade.user_id } }
+    end
+  end
+
   test "should show grade" do
     get grade_url(@grade)
     assert_redirected_to grades_url

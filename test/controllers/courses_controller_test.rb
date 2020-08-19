@@ -23,6 +23,14 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to courses_url
   end
 
+  test "should not create course without permission" do
+    sign_in @student
+    Course.delete(@course)
+    assert_no_difference('Course.count') do
+      post courses_url, params: { course: { courseType: @course.courseType, title: @course.title, year: @course.year } }
+    end
+  end
+
   test "should show course" do
     get course_url(@course)
     assert_redirected_to courses_url

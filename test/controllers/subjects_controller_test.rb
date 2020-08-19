@@ -23,6 +23,14 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to subjects_url
   end
 
+  test "should not create subject without permission" do
+    sign_in @student
+    Subject.delete(@subject)
+    assert_no_difference('Subject.count') do
+      post subjects_url, params: { subject: { title:@subject.title, course_id: @subject.course_id, description: @subject.description, user_id: @subject.user_id } }
+    end
+  end
+
   test "should show subject" do
     get subject_url(@subject)
     assert_redirected_to subjects_url

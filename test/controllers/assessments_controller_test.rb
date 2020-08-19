@@ -22,6 +22,13 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to assessments_url
   end
 
+  test "should not create assessment without permission" do
+    sign_in @student
+    assert_no_difference('Assessment.count') do
+      post assessments_url, params: { assessment: { name: @assessment.name, subject_id: @assessment.subject_id } }
+    end
+  end
+
   test "should show assessment" do
     get assessment_url(@assessment)
     assert_redirected_to assessments_url
