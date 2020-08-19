@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   get 'contact' => 'home#contact'
   post 'contact' => 'home#request_contact'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  #Handle unknown routes
+  match '*path' => redirect('/'), via: :get
+
 end
