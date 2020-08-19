@@ -55,4 +55,4 @@
 <% if !current_user.has_role? :student %>
   <button class="btn btn-primary" type="submit" onclick="MicroModal.show('modal-1')"><%= t('assesments.new_assessment') %></button>
 <% end %>
-<button class="btn btn-primary" onclick="table.replaceData()"><%= t('subject_title') %></button>
+<button class="btn btn-primary" onclick="table.replaceData()"><%= t('refresh_data') %></button>
