@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :assessments
   get 'admin/index'
   get 'admin/user/:id' => "admin#user", :as => "user_show"
+  get 'admin/user/role/:id' => "admin#role", :as => "user_role"
   devise_for :users, controllers: {
       sessions: 'users/sessions',
       registrations: 'users/registrations'

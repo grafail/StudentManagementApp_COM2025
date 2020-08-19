@@ -39,7 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(userParameters.permit(:email, :firstname, :lastname, :password, :course, :password_confirmation))
     respond_to do |format|
       if @user.save
-        puts('TRUE')
+        @user.grant userParameters[:roles] unless (userParameters[:roles].nil?)
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created }
       else
@@ -54,6 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     userParameters = params[:user]
     respond_to do |format|
       if @user.update(userParameters.permit(:email, :firstname, :lastname, :password, :course, :password_confirmation))
+        @user.grant userParameters[:roles] unless (userParameters[:roles].nil?)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render json: @user, status: :ok }
       else
@@ -76,12 +77,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :roles])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname, :roles])
   end
 
   # The path used after sign up.

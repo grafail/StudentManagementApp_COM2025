@@ -16,12 +16,29 @@
             {title: "First Name", field: "firstname", sorter: "string",  editor: <%= @editStatus %>},
             {title: "Last Name", field: "lastname", sorter: "string",  editor: <%= @editStatus %>},
             {title: "Email Address", field: "email", sorter: "string", validator:"regex:[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", editor: <%= @editStatus %>},
+            {title: "Role", field: "roles", mutatorData: roleMutator, formatter: roleFormatter, sorter: "string", editor: "select",
+                editorParams: {
+                values:[
+            {
+                label: "Staff",
+                value: "staff",
+            },
+            {
+                label: "Student",
+                value: "student",
+            },
+            {
+                label: "Admin",
+                value: "admin",
+            }
+            ]}
+            },
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteUser, cssClass: "DELETE_BUTTON_CLASS"}
         ],
         cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
-            $.ajax({
 
+            $.ajax({
                 url: '/users/'+cell.getRow().getData().id,
                 method: 'PATCH',
                 dataType: 'json',

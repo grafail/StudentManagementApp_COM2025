@@ -81,3 +81,29 @@ var subjectFormatter = function (cell) {
     });
     return responseData;
 }
+
+var roleMutator = function (value, data, type, params, component) {
+    var responseData = 'Not Found';
+    $.ajax({
+        url: '/admin/user/role/' + data.id,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            responseData = data;
+            if (data == null || data == undefined || responseData.length < 1)
+                responseData = 'No Role';
+        },
+        error: function () {
+            responseData = 'Not Found';
+        }
+    });
+    return responseData;
+}
+
+var roleFormatter = function (cell) {
+    let cellValue = cell.getValue();
+    if (cellValue != null && cellValue.length >= 1) {
+        return cellValue.charAt(0).toUpperCase() + cellValue.slice(1)
+    } else
+        return "No Role";
+}
