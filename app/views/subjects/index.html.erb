@@ -34,7 +34,7 @@
             {title: "<%= t('lecturer_id') %>", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('lecturer_name') %> %>", field: "user_id", formatter: userFormatter, sorter: "string", width: 200, editor: false},
             {title: "<%= t('title') %>", field: "title", sorter: "string", editor: <%= @editStatus %>},
-            {title: "<%= t('description') %>", formatter:"textarea", field: "description", sorter: "string", editor: false},
+            {title: "<%= t('description') %>", formatter:"textarea", field: "description", sorter: "string", editor: <%= @editStatus %>},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"},
             <% elsif  current_user.has_role? :student%>
