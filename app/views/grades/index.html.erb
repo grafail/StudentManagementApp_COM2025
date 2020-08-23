@@ -20,12 +20,12 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "<%= t('assessment_id') %>", field: "assessment_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('assessment_id') %>*", field: "assessment_id", validator:["required","integer"], sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('assessment_title') %>", field: "assessment_id", formatter: assessmentFormatter,sorter: "string", editor: false},
-            {title: "<%= t('user_id') %>", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('user_id') %>*", field: "user_id", validator:["required","integer"], sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('user_name') %>", field: "user_id", formatter: userFormatter, sorter: "string", editor: false},
             {title: "<%= I18n.t('email_address') %>", field: "user_id", formatter: userFormatterEmail, sorter: "string", editor: false},
-            {title: "<%= t('grade') %>", field: "grade", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('grade') %>*", field: "grade", validator:["required","numeric"], sorter: "number", editor: <%= @editStatus %>},
             <% if !current_user.has_role? :student %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>        ],

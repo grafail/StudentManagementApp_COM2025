@@ -20,9 +20,9 @@
         layout: "fitColumns",
         placeholder: "No Data Set",
         columns: [
-            {title: "<%= t('subject_id') %>", field: "subject_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('subject_id') %>*", field: "subject_id", validator:["required","integer"], sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('subject_title') %>", field: "subject_id",  formatter: subjectFormatter, sorter: "string", editor: false},
-            {title: "<%= t('assessment_name') %>", field: "name", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('assessment_name') %>*", field: "name", validator:["required"], sorter: "string", editor: <%= @editStatus %>},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>        ],

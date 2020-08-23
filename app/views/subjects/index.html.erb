@@ -28,13 +28,13 @@
         },
         placeholder: "No Data Set",
         columns: [
-            {title: "<%= t('subject_id') %>", field: "id", sorter: "string", editor: <%= @editStatus %>},
-            {title: "<%= t('course_id') %>", field: "course_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('id') %>", field: "id", sorter: "string", editor: false},
+            {title: "<%= t('course_id') %>*", validator:["required","integer"], field: "course_id", sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('course_name') %>", field: "course_id", formatter: courseFormatter, sorter: "string", width: 200, editor: false},
-            {title: "<%= t('lecturer_id') %>", field: "user_id", sorter: "number", editor: <%= @editStatus %>},
-            {title: "<%= t('lecturer_name') %> %>", field: "user_id", formatter: userFormatter, sorter: "string", width: 200, editor: false},
-            {title: "<%= t('title') %>", field: "title", sorter: "string", editor: <%= @editStatus %>},
-            {title: "<%= t('description') %>", formatter:"textarea", field: "description", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('lecturer_id') %>*", validator:["required","integer"], field: "user_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('lecturer_name') %>", field: "user_id", formatter: userFormatter, sorter: "string", width: 200, editor: false},
+            {title: "<%= t('title') %>*", validator:["required"], field: "title", sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('description') %>*", validator:["required"], formatter:"textarea", field: "description", sorter: "string", editor: <%= @editStatus %>},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"},
             <% elsif  current_user.has_role? :student%>

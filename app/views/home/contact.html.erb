@@ -25,18 +25,18 @@
           <div class="form-group">
             <label class="control-label col-sm-2" for="email"><%= I18n.t('email_address') %>:</label>
             <div class="col-sm-10">
-              <%= f.email_field :email, :hint => 'Enter email', :class => 'form-control', required: true %>
+              <%= f.email_field :email, :hint => t('contact.enter_email'), :class => 'form-control', required: true %>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="message">Comment:</label>
             <div class="col-sm-10">
-              <%= f.text_area :message, :hint => 'Enter your message', :class => 'form-control', :rows => '5', required: true %>
+              <%= f.text_area :message, :hint => t('contact.enter_your_message'), :class => 'form-control', :rows => '5', required: true %>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <%= f.submit 'Send Message', class: 'btn btn-primary' %>
+              <%= f.submit t('contact.send_message'), class: 'btn btn-primary' %>
             </div>
           </div>
         <% end %>

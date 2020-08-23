@@ -15,9 +15,9 @@
         placeholder: "No Data Set",
         columns: [
             {title: "<%= t('id') %>", field: "id", sorter: "number", editor: false},
-            {title: "<%= t('type') %>", field: "courseType", sorter: "string", editor: <%= @editStatus %>},
-            {title: "<%= t('title') %>", field: "title", sorter: "string", editor: <%= @editStatus %>},
-            {title: "<%= t('year') %>", field: "year", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= t('type') %>*", field: "courseType", validator:["required"], sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('title') %>*", field: "title", validator:["required"], sorter: "string", editor: <%= @editStatus %>},
+            {title: "<%= t('year') %>*", field: "year", validator:["required","integer"], sorter: "number", editor: <%= @editStatus %>},
             <% if current_user.has_role? :admin %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>

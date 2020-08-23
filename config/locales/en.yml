@@ -115,6 +115,10 @@ en:
     manage_subjects: "Manage Subjects"
     manage_users: "Manage Users"
     manage_enrollments: "Manage Enrollments"
+  contact:
+    enter_email: "Enter email"
+    enter_your_message: "Enter your message"
+    send_message: "Send Message"
 
 
 

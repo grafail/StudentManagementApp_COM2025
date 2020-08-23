@@ -13,10 +13,10 @@
         placeholder: "No Data Set",
         columns: [
             {title: "<%= I18n.t('user_id') %>", field:"id", sorter: "number",  editor: false},
-            {title: "<%= I18n.t('firstname') %>", field: "firstname", sorter: "string",  editor: <%= @editStatus %>},
-            {title: "<%= I18n.t('lastname') %>", field: "lastname", sorter: "string",  editor: <%= @editStatus %>},
-            {title: "<%= I18n.t('email_address') %>", field: "email", sorter: "string", validator:"regex:[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", editor: <%= @editStatus %>},
-            {title: "<%= I18n.t('role') %>", field: "roles", mutatorData: roleMutator, formatter: roleFormatter, sorter: "string", editor: "select",
+            {title: "<%= I18n.t('firstname') %>*", field: "firstname", sorter: "string", validator:["string","required"],  editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('lastname') %>*", field: "lastname", sorter: "string", validator:["string","required"],  editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('email_address') %>*", field: "email", sorter: "string", validator:["regex:[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}","required"], editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('role') %>*", field: "roles", mutatorData: roleMutator, formatter: roleFormatter, validator:["required"], sorter: "string", editor: "select",
                 editorParams: {
                 values:[
             {
