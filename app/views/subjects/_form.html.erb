@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :course_id %>
-    <%= form.text_field :course_id, required: true %>
+    <%= form.label :course_id, t('course_id') %>
+    <%= form.number_field :course_id, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :user_id, "Lecturer" %>
-    <%= form.text_field :user_id, required: true %>
+    <%= form.label :user_id, t('lecturer_id') %>
+    <%= form.number_field :user_id, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_area :title, required: true %>
+    <%= form.text_field :title, required: true %>
   </div>
 
   <div class="field">
