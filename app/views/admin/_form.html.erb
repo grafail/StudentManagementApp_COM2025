@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :course_id, t('course_id') %><br />
+    <%= f.text_field :course_id, required: false %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>

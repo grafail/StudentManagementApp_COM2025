@@ -16,6 +16,8 @@
             {title: "<%= I18n.t('firstname') %>*", field: "firstname", sorter: "string", validator:["string","required"],  editor: <%= @editStatus %>},
             {title: "<%= I18n.t('lastname') %>*", field: "lastname", sorter: "string", validator:["string","required"],  editor: <%= @editStatus %>},
             {title: "<%= I18n.t('email_address') %>*", field: "email", sorter: "string", validator:["regex:[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}","required"], editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('course_id') %>*", field: "course_id", sorter: "number", editor: <%= @editStatus %>},
+            {title: "<%= I18n.t('course_name') %>*", field: "course_id", formatter:courseFormatter, sorter: "string", editor: false},
             {title: "<%= I18n.t('role') %>*", field: "roles", mutatorData: roleMutator, formatter: roleFormatter, validator:["required"], sorter: "string", editor: "select",
                 editorParams: {
                 values:[
