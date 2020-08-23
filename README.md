@@ -1,6 +1,6 @@
 # README
 
-GitHub URL: https://github.com/grafail/COM2027_Group17
+GitHub URL: https://github.com/grafail/StudentManagementApp_COM2025
 
 In order to run this project the following commands should be run:
 ```
