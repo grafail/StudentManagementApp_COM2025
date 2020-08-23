@@ -5,6 +5,7 @@ class AssessmentsController < ApplicationController
   # GET /assessments
   # GET /assessments.json
   def index
+    # Index shows different content according to the user who views it
     if current_user.has_role? :admin
       @editStatus = 'true'
       @assessments = Assessment.all
@@ -20,6 +21,7 @@ class AssessmentsController < ApplicationController
   # GET /assessments/1
   # GET /assessments/1.json
   def show
+    # Index shows different content according to the user who views it
     respond_to do |format|
         format.html { redirect_to assessments_url}
         format.json {

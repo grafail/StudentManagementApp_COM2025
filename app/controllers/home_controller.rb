@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   def contact
   end
 
+  # Used after to process a submitted contact request
   def request_contact
     fname = params[:fname]
     lname = params[:lname]
@@ -24,6 +25,7 @@ class HomeController < ApplicationController
 
   private
 
+  # Uses a regular expression to check if an email is valid
   def isEmail(str)
     return str.match('[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}')
   end

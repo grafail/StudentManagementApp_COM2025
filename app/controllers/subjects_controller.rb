@@ -6,6 +6,7 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
+    # Index shows different content according to the user who views it
     @editStatus = 'true'
     if current_user.has_role? :admin
       @subjects = Subject.all

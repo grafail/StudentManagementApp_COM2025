@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   before_action :checkIfAdmin, except: [:user]
 
+  # Index page for users
   def index
     @users = User.all
     @editStatus = 'true'
@@ -10,6 +11,7 @@ class AdminController < ApplicationController
     end
   end
 
+  # Get info for a certain user
   def user
     @user = User.find_by_id(params[:id])
     if @user.has_role? :staff or(current_user.has_role? :student and current_user.id == @user.id) or
@@ -26,6 +28,7 @@ class AdminController < ApplicationController
     end
   end
 
+  # Get role of a certain user
   def role
     @user = User.find_by_id(params[:id])
     userRole = @user.roles_name[0]

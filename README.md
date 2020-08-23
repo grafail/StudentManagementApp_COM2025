@@ -17,7 +17,7 @@ This project is a system management system (like self-service).
 Scripts using JQuery and AJAX were used to link it to the database.  
 For the new item modal [Micromodal.js](https://micromodal.now.sh) was used.  
 To validate input within the [jQuery Validation Plugin](https://jqueryvalidation.org/) was used.  
-For the notifications [toastr](https://github.com/CodeSeven/toastr) was used to replace the default flash messages.
+For the notifications [toastr](https://github.com/CodeSeven/toastr) was used to replace the default flash messages.  
 For the user capabilities [Devise](https://github.com/heartcombo/devise) with [rolify](https://github.com/RolifyCommunity/rolify) for the roles is used.
 
 

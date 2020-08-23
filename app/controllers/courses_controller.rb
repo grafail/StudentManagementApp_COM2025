@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
+    # Index shows different content according to the user who views it
     @courses = Course.all
     if current_user.has_role? :admin
       @editStatus = 'true'

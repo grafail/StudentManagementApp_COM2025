@@ -6,6 +6,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments
   # GET /enrollments.json
   def index
+    # Index shows different content according to the user who views it
     @editStatus = 'false'
     if current_user.has_role? :admin
       @enrollments = Enrollment.all
