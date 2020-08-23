@@ -47,11 +47,11 @@ Admin:
 As only admins can create new users some default accounts are provided:
 
 Student Account: 
-* Email: staff@example.org
+* Email: student@example.org
 * Password: 123456
 
 Staff Account: 
-* Email: student@example.org
+* Email: staff@example.org
 * Password: 123456
 
 Admin Account: 
