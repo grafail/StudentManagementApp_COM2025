@@ -13,11 +13,18 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should return contact email" do
-    mail = ContactMailer.contact_email("test@example.org",
-                                       "Matthew", "Casey", @message = "Hello")
-    assert_equal ['info@studentManagementApp.com'], mail.to
-    assert_equal ['info@studentManagementApp.com'], mail.from
+  test "should email" do
+    post contact_url, params: { fname: 'Rafail', lname: 'Giavrimis', email: 'test@example.org', message: '12345' }
+
+    assert_redirected_to root_url
+    assert_not_empty(flash[:notice])
+  end
+
+  test "should not email" do
+    post contact_url, params: { fname: 'Rafail', lname: 'Giavrimis', email: 'testexample.org', message: '12345' }
+
+    assert_redirected_to root_url, notice: 'test'
+    assert_not_empty(flash[:alert])
   end
 
 end
