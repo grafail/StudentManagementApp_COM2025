@@ -8,7 +8,7 @@ class Subject < ApplicationRecord
   validates :course_id, :user_id, numericality: :only_integer
 
   scope :with_lecturer, ->(lecturer) { where(user: lecturer) }
-  scope :student_can_enroll, ->(student) { where(course: student.course_id) }
+  scope :student_can_enroll, ->(student) { where(course: student.course_id).reject {|subject| Subject.with_student(student).exists?(subject.id)} }
   scope :with_student, ->(student) { Enrollment.with_student(student) }
 
 end
