@@ -18,6 +18,7 @@ Scripts using JQuery and AJAX were used to link it to the database.
 For the new item modal [Micromodal.js](https://micromodal.now.sh) was used.  
 To validate input within the [jQuery Validation Plugin](https://jqueryvalidation.org/) was used.  
 For the notifications [toastr](https://github.com/CodeSeven/toastr) was used to replace the default flash messages.
+For the user capabilities [Devise](https://github.com/heartcombo/devise) with [rolify](https://github.com/RolifyCommunity/rolify) for the roles is used.
 
 
 The default edit, show and new views are not included as this functionalities are covered within the tables in the index view.
