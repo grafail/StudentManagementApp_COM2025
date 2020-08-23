@@ -26,7 +26,7 @@
             //response - the JSON object returned in the body of the response.
             return response; //return the tableData property of a response json object
         },
-        placeholder: "No Data Set",
+        placeholder: "No Data Available",
         columns: [
             {title: "<%= t('id') %>", field: "id", sorter: "string", editor: false},
             {title: "<%= t('course_id') %>*", validator:["required","integer"], field: "course_id", sorter: "number", editor: <%= @editStatus %>},

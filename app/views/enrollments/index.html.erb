@@ -18,7 +18,7 @@
     var table = new Tabulator("#table", {
         maxHeight: "85%",
         layout: "fitColumns",
-        placeholder: "No Data Set",
+        placeholder: "No Data Available",
         columns: [
             {title: "<%= t('user_id') %>*", field: "user_id", validator:["required","integer"], sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('user_name') %>", field: "user_id",  formatter:userFormatter, sorter: "string", editor: false},
@@ -54,5 +54,7 @@
     });
 
 </script>
-<button class="btn btn-primary" onclick="MicroModal.show('modal-1')"><%= t('enrollments.new_enrollment') %></button>
+<% if current_user.has_role? :admin %>
+  <button class="btn btn-primary" onclick="MicroModal.show('modal-1')"><%= t('enrollments.new_enrollment') %></button>
+<% end %>
 <button class="btn btn-primary" onclick="table.replaceData()"><%= t('refresh_data') %></button>

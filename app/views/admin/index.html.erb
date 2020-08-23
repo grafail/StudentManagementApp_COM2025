@@ -10,7 +10,7 @@
     var table = new Tabulator("#table", {
         maxHeight: "85%",
         layout: "fitColumns",
-        placeholder: "No Data Set",
+        placeholder: "No Data Available",
         columns: [
             {title: "<%= I18n.t('user_id') %>", field:"id", sorter: "number",  editor: false},
             {title: "<%= I18n.t('firstname') %>*", field: "firstname", sorter: "string", validator:["string","required"],  editor: <%= @editStatus %>},

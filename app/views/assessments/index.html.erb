@@ -18,12 +18,12 @@
     var table = new Tabulator("#table", {
         maxHeight: "85%",
         layout: "fitColumns",
-        placeholder: "No Data Set",
+        placeholder: "No Data Available",
         columns: [
             {title: "<%= t('subject_id') %>*", field: "subject_id", validator:["required","integer"], sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('subject_title') %>", field: "subject_id",  formatter: subjectFormatter, sorter: "string", editor: false},
             {title: "<%= t('assessment_name') %>*", field: "name", validator:["required"], sorter: "string", editor: <%= @editStatus %>},
-            <% if current_user.has_role? :admin %>
+            <% if current_user.has_role? :admin or current_user.has_role? :staff  %>
             {formatter:"buttonCross", width:40, align:"center", cellClick:deleteItem, cssClass: "DELETE_BUTTON_CLASS"}
             <% end %>        ],
         cellEdited: function (cell) {

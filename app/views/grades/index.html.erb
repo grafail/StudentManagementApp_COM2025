@@ -18,7 +18,7 @@
     var table = new Tabulator("#table", {
         maxHeight: "85%",
         layout: "fitColumns",
-        placeholder: "No Data Set",
+        placeholder: "No Data Available",
         columns: [
             {title: "<%= t('assessment_id') %>*", field: "assessment_id", validator:["required","integer"], sorter: "number", editor: <%= @editStatus %>},
             {title: "<%= t('assessment_title') %>", field: "assessment_id", formatter: assessmentFormatter,sorter: "string", editor: false},

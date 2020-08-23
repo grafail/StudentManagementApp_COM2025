@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_user!, :checkIfAdmin, only: [:new, :create]
+  before_action :authenticate_user!, :checkIfAdmin, only: [:new, :create, :deleteUser, :update_info]
   skip_before_action :require_no_authentication
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]

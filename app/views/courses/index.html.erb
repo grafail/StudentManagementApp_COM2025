@@ -12,7 +12,7 @@
     var table = new Tabulator("#table", {
         maxHeight: "85%",
         layout: "fitColumns",
-        placeholder: "No Data Set",
+        placeholder: "No Data Available",
         columns: [
             {title: "<%= t('id') %>", field: "id", sorter: "number", editor: false},
             {title: "<%= t('type') %>*", field: "courseType", validator:["required"], sorter: "string", editor: <%= @editStatus %>},

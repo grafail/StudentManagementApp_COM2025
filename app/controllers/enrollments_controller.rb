@@ -1,6 +1,7 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
-  before_action :checkIfAdmin, except: [:index, :show]
+  before_action :checkIfAdmin, except: [:index, :show, :create]
+  before_action :checkNotStaff, except: [:create]
 
   # GET /enrollments
   # GET /enrollments.json

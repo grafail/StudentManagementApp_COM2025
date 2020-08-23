@@ -1,6 +1,7 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
-  before_action :checkIfAdmin, except: [:index, :show]
+  before_action :checkNotStudent, except: [:index, :show, :destroy]
+  before_action :checkIfAdmin, only: [:destroy]
 
   # GET /subjects
   # GET /subjects.json
