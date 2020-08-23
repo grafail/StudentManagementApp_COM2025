@@ -7,9 +7,9 @@ Course.create!([
                ])
 
 User.create!([
-               { firstname: 'John', lastname: 'Doe', email: 'test@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil },
-               { firstname: 'Jane', lastname: 'Doe', email: 'test2@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, course_id: 1 },
-               { firstname: 'Joe', lastname: 'Bloggs', email: 'test3@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil}
+               { firstname: 'John', lastname: 'Doe', email: 'staff@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil },
+               { firstname: 'Jane', lastname: 'Doe', email: 'student@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, course_id: 1 },
+               { firstname: 'Joe', lastname: 'Bloggs', email: 'admin@example.org', password: '123456', reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil}
              ])
 
 Subject.create!([
