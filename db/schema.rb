@@ -13,24 +13,24 @@
 ActiveRecord::Schema.define(version: 2020_08_18_100301) do
 
   create_table "assessments", force: :cascade do |t|
-    t.integer "subject_id"
-    t.string "name"
+    t.integer "subject_id", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_assessments_on_subject_id"
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string "title"
-    t.integer "year"
+    t.string "title", null: false
+    t.integer "year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "courseType"
+    t.string "courseType", null: false
   end
 
   create_table "enrollments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "subject_id"
+    t.integer "user_id", null: false
+    t.integer "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_enrollments_on_subject_id"
@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 2020_08_18_100301) do
   end
 
   create_table "grades", force: :cascade do |t|
-    t.integer "assessment_id"
-    t.integer "user_id"
-    t.float "grade"
+    t.integer "assessment_id", null: false
+    t.integer "user_id", null: false
+    t.float "grade", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assessment_id"], name: "index_grades_on_assessment_id"
@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 2020_08_18_100301) do
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.integer "course_id"
-    t.integer "user_id"
-    t.text "description"
+    t.integer "course_id", null: false
+    t.integer "user_id", null: false
+    t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
+    t.string "title", null: false
     t.index ["course_id"], name: "index_subjects_on_course_id"
     t.index ["user_id"], name: "index_subjects_on_user_id"
   end
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2020_08_18_100301) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
-    t.string "firstname"
-    t.string "lastname"
+    t.string "firstname", null: false
+    t.string "lastname", null: false
     t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

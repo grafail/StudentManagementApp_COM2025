@@ -2,6 +2,8 @@
 
 GitHub URL: https://github.com/grafail/StudentManagementApp_COM2025
 
+This commit contains a commit that I accidentaly did not push (thus did not test before submitting) and a bugfix commit for it (created after deadline).
+
 In order to run this project the following commands should be run:
 ```
 rails db:migrate  

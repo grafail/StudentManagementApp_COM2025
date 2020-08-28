@@ -13,6 +13,7 @@ class SubjectTest < ActiveSupport::TestCase
     subject.course_id = -1
     subject.user_id = users(:staff).id
     subject.title = "Test"
+    subject.description = "123"
     subject.save
     refute subject.valid?
   end
@@ -22,6 +23,7 @@ class SubjectTest < ActiveSupport::TestCase
     subject.course_id = courses(:one).id
     subject.user_id = users(:staff).id
     subject.title = "Test"
+    subject.description = "123"
     subject.save
     assert subject.valid?
   end
